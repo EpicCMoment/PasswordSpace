@@ -1,13 +1,18 @@
 package kozmikoda.passwordspace;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -27,27 +32,39 @@ public class GUIController {
     @FXML
     private Stage window;
 
+    @FXML
+    private Pane passwdForgetNamePane, passwdForgetPhonePane, passwdForgetNewPasswdPane, signUpPane;
+
+    @FXML
+    private JFXButton loginButton;
+
+    @FXML
+    private TextField passwdVerifName, signUpNameField, signUpSurnameField, signUpUsernameField, signUpPhoneField, signUpMailField, signUpPasswordField;
+
+    @FXML
+    private Hyperlink forgotPasswdLink, signUpLink;
+
+    @FXML
+    private PasswordField passwdVerifCode, passwdNewPasswd;
 
 
     // Drag window functions
-
     @FXML
     void dragWindow(MouseEvent event) {
         window.setX(event.getScreenX() - offsetX);
         window.setY(event.getScreenY() - offsetY);
     }
 
-
+    @FXML
     public void setWindowOffset(MouseEvent event) {
         offsetX = event.getSceneX();
         offsetY = event.getSceneY();
-
     }
 
-
-
+    //Changing Scenes
     @FXML
-    private void changeToScene2(ActionEvent event) throws IOException{
+    void changeToScene2(ActionEvent event) throws IOException{
+
         scene = ((Stage)FXMLLoader.load(getClass().getResource("scene2.fxml"))).getScene();
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 
@@ -68,11 +85,117 @@ public class GUIController {
 
     }
 
+
+    // Close button method
     @FXML
     protected void closeButton(ActionEvent event) {
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         stage.close();
 
     }
+
+    // ---------------------------------------------
+    // FORGOT PASSWORD
+    @FXML
+    void forgetPasswdButton() {
+        passwdForgetNamePane.setVisible(true);
+        loginButton.setDisable(true);
+        forgotPasswdLink.setDisable(true);
+        signUpLink.setDisable(true);
+    }
+
+    @FXML
+    void forgetPasswdBackButton() {
+        passwdForgetNamePane.setVisible(false);
+        loginButton.setDisable(false);
+        forgotPasswdLink.setDisable(false);
+        signUpLink.setDisable(false);
+        passwdVerifName.clear();
+    }
+
+    @FXML
+    void forgetPasswdBackButton2() {
+        passwdForgetPhonePane.setVisible(false);
+        passwdForgetNamePane.setVisible(true);
+        passwdVerifCode.clear();
+    }
+
+
+    // Verification page
+    @FXML
+    void sendVerificationButton() {
+        passwdForgetNamePane.setVisible(false);
+        passwdForgetPhonePane.setVisible(true);
+    }
+
+    // Reset passwd page
+    @FXML
+    void verifyButton() {
+        passwdForgetPhonePane.setVisible(false);
+        passwdForgetNewPasswdPane.setVisible(true);
+    }
+
+    // After passwd reset
+    @FXML
+    void resetPasswdButton() {
+        passwdForgetNewPasswdPane.setVisible(false);
+        loginButton.setDisable(false);
+        forgotPasswdLink.setDisable(false);
+        signUpLink.setDisable(false);
+        passwdNewPasswd.clear();
+    }
+
+
+    // ----------------------------------------------------
+
+    // SIGN UP PART
+    @FXML
+    void signUpLinkAction() {
+        signUpPane.setVisible(true);
+        loginButton.setDisable(true);
+        forgotPasswdLink.setDisable(true);
+        signUpLink.setDisable(true);
+    }
+
+    @FXML
+    void signUpBackButton() {
+        signUpPane.setVisible(false);
+        loginButton.setDisable(false);
+        forgotPasswdLink.setDisable(false);
+        signUpLink.setDisable(false);
+
+        // clear the text-fields
+        signUpNameField.clear();
+        signUpSurnameField.clear();
+        signUpUsernameField.clear();
+        signUpPhoneField.clear();
+        signUpMailField.clear();
+        signUpPasswordField.clear();
+    }
+
+    @FXML
+    void signUpButton() {
+        signUpPane.setVisible(false);
+        loginButton.setDisable(false);
+        forgotPasswdLink.setDisable(false);
+        signUpLink.setDisable(false);
+
+        // ---------
+        // GET TEXTS HERE AND SEND TO THE MAIN USER ACCOUNT
+        // ---------
+
+        signUpNameField.clear();
+        signUpSurnameField.clear();
+        signUpUsernameField.clear();
+        signUpPhoneField.clear();
+        signUpMailField.clear();
+        signUpPasswordField.clear();
+
+    }
+
+    // ---------------------------------
+
+
+
 
 }

@@ -1,9 +1,11 @@
 package kozmikoda.passwordspace;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -18,7 +20,6 @@ public class GUIRunner extends Application{
 
 
     public void start(Stage s) throws Exception{
-
 
         fxml = new FXMLLoader(getClass().getResource("gui.fxml"));
         window = fxml.load();
@@ -40,7 +41,7 @@ public class GUIRunner extends Application{
 
     }
 
-    public static void main(String[] args) {
+    public static void main() {
         launch();
     }
 

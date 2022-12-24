@@ -6,10 +6,10 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.stage.Stage?>
 
-<Stage xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kozmikoda.passwordspace.GUIController">
+<Stage  fx:id="window" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kozmikoda.passwordspace.GUIController">
     <scene>
         <Scene fill="#ffffff00">
-                <Pane prefHeight="500.0" prefWidth="500.0" styleClass="mainBackground" stylesheets="@scene2.css">
+                <Pane onMouseDragged="#dragWindow" onMousePressed="#setWindowOffset" prefHeight="500.0" prefWidth="500.0" styleClass="mainBackground" stylesheets="@scene2.css">
                     <JFXButton buttonType="RAISED" layoutX="146.0" layoutY="183.0" onAction="#changeToScene1" prefHeight="67.0" prefWidth="208.0" style="-fx-background-color: #ffffff;" />
                 </Pane>
         </Scene>

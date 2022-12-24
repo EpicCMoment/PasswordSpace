@@ -2,3 +2,30 @@
     -fx-background-radius: 20 20 0 0;
     -fx-background-color: #0f88e2;
 }
+
+.signlink {
+    -fx-border-color: transparent;
+    -fx-padding: 4 0 4 0;
+}
+
+.forgetPasswdNamePane {
+    -fx-background-color: rgba(0, 100, 100, 0)
+}
+
+.forgetPasswdNameField {
+    -fx-background-color: transparent;
+    -fx-text-fill: #FFFFFF;
+}
+
+.backButton {
+     -fx-graphic: url(back.png);
+}
+
+.closeButton {
+    -fx-graphic: url(closeButton.png);
+}
+
+.password {
+    -fx-background-color: transparent;
+    -fx-text-fill: #FFFFFF;
+}
