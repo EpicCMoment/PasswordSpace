@@ -48,9 +48,6 @@ public class GUIController {
 
     @FXML
     private GridPane serviceGridPane;
-    @FXML
-    private ScrollPane serviceScrollPane;
-
 
     // Drag window functions
     @FXML
@@ -204,7 +201,6 @@ public class GUIController {
     void addService() {
         serviceGridPane.addRow(i, new Text(" "));
         serviceGridPane.autosize();
-        serviceScrollPane.autosize();
 
         i++;
         System.out.println(i);
