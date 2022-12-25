@@ -59,4 +59,8 @@ public class ServiceMap {
         services.remove(service);
     }
 
+    public int getSize() {
+        return services.size();
+    }
+
 }

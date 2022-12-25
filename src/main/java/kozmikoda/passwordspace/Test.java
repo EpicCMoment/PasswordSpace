@@ -13,8 +13,6 @@ public class Test {
 
             System.out.println(Utility.generateResetCode());
 
-
-
         }catch (Exception e) {
             e.printStackTrace();
         }

@@ -45,10 +45,10 @@ test {
 }
 
 jlink {
-    imageZip = project.file("${buildDir}/distributions/PasswordSpace1.zip")
+    imageZip = project.file("${buildDir}/distributions/PasswordSpace.zip")
     options = ['--strip-debug', '--compress', '1', '--no-header-files', '--no-man-pages']
     launcher {
-        name = 'Password Space'
+        name = 'PasswordSpace'
     }
 }
 
