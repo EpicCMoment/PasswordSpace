@@ -6,14 +6,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -46,6 +45,11 @@ public class GUIController {
 
     @FXML
     private PasswordField passwdVerifCode, passwdNewPasswd;
+
+    @FXML
+    private GridPane serviceGridPane;
+    @FXML
+    private ScrollPane serviceScrollPane;
 
 
     // Drag window functions
@@ -195,7 +199,16 @@ public class GUIController {
 
     // ---------------------------------
 
+    static int i = 7;
+    @FXML
+    void addService() {
+        serviceGridPane.addRow(i, new Text(" "));
+        serviceGridPane.autosize();
+        serviceScrollPane.autosize();
 
+        i++;
+        System.out.println(i);
 
+    }
 
 }

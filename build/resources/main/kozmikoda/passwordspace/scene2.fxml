@@ -1,17 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.Scene?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.stage.Stage?>
 
-<Stage  fx:id="window" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kozmikoda.passwordspace.GUIController">
-    <scene>
-        <Scene fill="#ffffff00">
-                <Pane onMouseDragged="#dragWindow" onMousePressed="#setWindowOffset" prefHeight="500.0" prefWidth="500.0" styleClass="mainBackground" stylesheets="@scene2.css">
-                    <JFXButton buttonType="RAISED" layoutX="146.0" layoutY="183.0" onAction="#changeToScene1" prefHeight="67.0" prefWidth="208.0" style="-fx-background-color: #ffffff;" />
-                </Pane>
-        </Scene>
-    </scene>
+<Stage fx:id="window" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kozmikoda.passwordspace.GUIController">
+   <scene>
+      <Scene>
+         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="834.0">
+            <children>
+               <ScrollPane fx:id="serviceScrollPane" layoutY="192.0" prefHeight="302.0" prefWidth="833.0">
+                  <content>
+                     <HBox prefHeight="383.0" prefWidth="766.0">
+                        <children>
+                           <GridPane fx:id="serviceGridPane" alignment="TOP_RIGHT" gridLinesVisible="true" prefHeight="420.0" prefWidth="818.0" HBox.hgrow="ALWAYS">
+                              <columnConstraints>
+                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              </columnConstraints>
+                              <rowConstraints>
+                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              </rowConstraints>
+                           </GridPane>
+                        </children>
+                     </HBox>
+                  </content>
+               </ScrollPane>
+               <ImageView fitHeight="101.0" fitWidth="282.0" layoutX="276.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@passwordSpace.png" />
+                  </image>
+               </ImageView>
+               <Button layoutX="52.0" layoutY="92.0" mnemonicParsing="false" onAction="#addService" text="Button" />
+            </children>
+         </AnchorPane>
+      </Scene>
+   </scene>
 </Stage>
