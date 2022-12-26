@@ -38,7 +38,7 @@ public class GUIController {
     private Stage window;
 
     @FXML
-    private Pane passwdForgetNamePane, passwdForgetPhonePane, passwdForgetNewPasswdPane, signUpPane, signupFailPane;
+    private Pane passwdForgetNamePane, passwdForgetPhonePane, passwdForgetNewPasswdPane, signUpPane, signupFailPane, servicesPane;
 
     @FXML
     private JFXButton loginButton;
@@ -222,13 +222,19 @@ public class GUIController {
         try {
             failLoginLabel.setVisible(false);
             UserValidator.validateUser(db, loginUsernameField.getText(), loginPasswordField.getText());
+            servicesPane.setVisible(true);
+            window.setHeight(591);
+            window.setWidth(874);
 
+        /*
             scene = ((Stage)FXMLLoader.load(getClass().getResource("scene2.fxml"))).getScene();
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 
             scene.setFill(Color.TRANSPARENT);
             stage.setScene(scene);
             stage.show();
+
+            */
         } catch (Exception e) {
             failLoginLabel.setVisible(true);
         }
