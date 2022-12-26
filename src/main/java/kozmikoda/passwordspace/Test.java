@@ -6,9 +6,11 @@ public class Test {
         try {
             PSQLConnection db = new PSQLConnection();
 
-            MainUserAccount m = new MainUserAccount(db, "arf");
+            MainUserAccount m = new MainUserAccount(db, "admin");
 
-            m.updatePassword("zuhahahahaha");
+            m.addNewService("netflix", "sertaki", "anan3");
+            m.addNewService("youtube", "sertaki", "anan3");
+            m.addNewService("facebook", "sertaki", "anan3");
 
 
         }catch (Exception e) {

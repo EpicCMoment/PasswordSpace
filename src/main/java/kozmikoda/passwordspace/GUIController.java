@@ -91,12 +91,17 @@ public class GUIController {
     */
     @FXML
     void changeToScene1(ActionEvent event) throws IOException {
-        scene = ((Stage)FXMLLoader.load(getClass().getResource("gui.fxml"))).getScene();
+        servicesPane.setVisible(false);
+
+
+        /* scene = ((Stage)FXMLLoader.load(getClass().getResource("gui.fxml"))).getScene();
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 
         scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
         stage.show();
+        */
+
 
     }
 
@@ -233,14 +238,19 @@ public class GUIController {
 
     // LOGIN PART
     @FXML
-    void loginButtonAction(ActionEvent event) {
+    void loginButtonAction() {
         try {
             failLoginLabel.setVisible(false);
             UserValidator.validateUser(db, loginUsernameField.getText(), loginPasswordField.getText());
             servicesPane.setVisible(true);
-            window.setHeight(591);
-            window.setWidth(874);
 
+            m = new MainUserAccount(db, loginUsernameField.getText());
+            final int[] i = {0};
+            m.getServices().getHashMap().forEach((serviceName, credentials) -> {
+                foo = (JFXButton) serviceVbox.getChildren().get(i[0]);
+                foo.setText(serviceName);
+                i[0]++;
+            });
         /*
             scene = ((Stage)FXMLLoader.load(getClass().getResource("scene2.fxml"))).getScene();
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
