@@ -159,6 +159,13 @@ public class PSQLConnection{
 
     }
 
+    public final void updateColumn(String targetUser, String newPassword) throws SQLException{
+        String updateCommand = "UPDATE " + accountInfoTable + " SET password_hash"  +
+                " = '" + HashedPassword.calculateDigest(newPassword, "sha-256") + "' WHERE user_name = '" + targetUser + "';";
+
+        commandExecutor.execute(updateCommand);
+    }
+
     public static String getServiceInfoTable() {
         return serviceInfoTable;
     }

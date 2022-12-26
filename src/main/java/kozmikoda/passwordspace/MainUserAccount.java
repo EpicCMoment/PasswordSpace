@@ -132,6 +132,10 @@ public class MainUserAccount {
         services.removeService(service);
     }
 
+    public void updatePassword(String password) throws SQLException {
+        dbConnection.updateColumn(userName, password);
+    }
+
     private void fetchRealName() throws SQLException{
 
         Statement s = dbConnection.getCommandExecutor();
