@@ -33,6 +33,8 @@ public class MainUserAccount {
 
     PSQLConnection dbConnection;
 
+    Statement s;
+
 
 
     // call to connect to an existing user
@@ -71,7 +73,7 @@ public class MainUserAccount {
                                String eMail, String phoneNumber) throws SQLException
     {
 
-        Statement s = dbConnection.getCommandExecutor();
+        s = dbConnection.getCommandExecutor();
 
         String databaseCreatorStatement = String.format("CREATE DATABASE %s;", userName);
         String user_credentialsCreatorStatement = "CREATE TABLE user_credentials (" +
@@ -138,7 +140,7 @@ public class MainUserAccount {
 
     private void fetchRealName() throws SQLException{
 
-        Statement s = dbConnection.getCommandExecutor();
+        s = dbConnection.getCommandExecutor();
 
         ResultSet rs = s.executeQuery("SELECT real_name FROM user_credentials WHERE user_name = '"+ userName +"';");
         rs.next();
@@ -147,7 +149,7 @@ public class MainUserAccount {
     }
     private void fetchEMail() throws SQLException{
 
-        Statement s = dbConnection.getCommandExecutor();
+        s = dbConnection.getCommandExecutor();
 
         ResultSet rs = s.executeQuery("SELECT e_mail FROM user_credentials WHERE user_name = '"+ userName +"';");
 
@@ -157,7 +159,7 @@ public class MainUserAccount {
     }
     private void fetchPhoneNumber() throws SQLException{
 
-        Statement s = dbConnection.getCommandExecutor();
+        s = dbConnection.getCommandExecutor();
 
         ResultSet rs = s.executeQuery("SELECT phone_number FROM user_credentials WHERE user_name = '"+ userName +"';");
 

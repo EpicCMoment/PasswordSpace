@@ -200,7 +200,7 @@
                         <Image url="@passwdUsernameText.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="148.0" layoutY="214.0" text="Cannot find the username!" textFill="RED">
+                  <Label fx:id="passwdUserNotFoundLabel" layoutX="155.0" layoutY="212.0" text="This user does not exist!" textFill="RED" visible="false">
                      <font>
                         <Font size="15.0" />
                      </font>

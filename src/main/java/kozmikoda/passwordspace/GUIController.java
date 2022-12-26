@@ -58,7 +58,7 @@ public class GUIController {
     private VBox serviceVbox;
 
     @FXML
-    private Label failLoginLabel;
+    private Label failLoginLabel, passwdUserNotFoundLabel;
 
     @FXML
     private TextField loginUsernameField;
@@ -139,8 +139,17 @@ public class GUIController {
     // Verification page
     @FXML
     void sendVerificationButton() {
-        passwdForgetNamePane.setVisible(false);
-        passwdForgetPhonePane.setVisible(true);
+        try {
+            passwdUserNotFoundLabel.setVisible(false);
+
+            passwdForgetNamePane.setVisible(false);
+            passwdForgetPhonePane.setVisible(true);
+            m = new MainUserAccount(db, passwdVerifName.getText());
+
+        } catch (Exception e) {
+            passwdUserNotFoundLabel.setVisible(true);
+        }
+
     }
 
     // Reset passwd page
@@ -152,7 +161,10 @@ public class GUIController {
 
     // After passwd reset
     @FXML
-    void resetPasswdButton() {
+    void resetPasswdButton() throws SQLException {
+
+        m.updatePassword(passwdNewPasswd.getText());
+
         passwdForgetNewPasswdPane.setVisible(false);
         loginButton.setDisable(false);
         forgotPasswdLink.setDisable(false);
@@ -193,6 +205,8 @@ public class GUIController {
         try {
             signupFailPane.setVisible(false);
 
+            db = new PSQLConnection();
+
             m = new MainUserAccount(db, signUpUsernameField.getText(), signUpPasswordField.getText(),
                     signUpNameField.getText(), signUpMailField.getText(), signUpPhoneField.getText());
 
@@ -212,6 +226,7 @@ public class GUIController {
 
         } catch (Exception e) {
             signupFailPane.setVisible(true);
+            e.printStackTrace();
         }
     }
 
@@ -251,7 +266,11 @@ public class GUIController {
             foo.setText(serviceName);
             i[0]++;
         });
+
+
     }
+
+
 
 
 
