@@ -63,4 +63,8 @@ public class ServiceMap {
         return services.size();
     }
 
+    public HashMap<String, Pair<String, String>> getHashMap() {
+        return  this.services;
+    }
+
 }

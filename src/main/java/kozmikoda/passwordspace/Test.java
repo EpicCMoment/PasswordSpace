@@ -3,15 +3,12 @@ package kozmikoda.passwordspace;
 public class Test {
 
     public static void main(String[] args) {
-
-
         try {
             PSQLConnection db = new PSQLConnection();
 
-            MainUserAccount m = new MainUserAccount(db, "behiyy");
+            MainUserAccount m = new MainUserAccount(db, "arda", "arif123", "arif", "mailto@baban", "9090");
 
 
-            System.out.println(Utility.generateResetCode());
 
         }catch (Exception e) {
             e.printStackTrace();

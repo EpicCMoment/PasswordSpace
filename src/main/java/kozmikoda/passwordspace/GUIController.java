@@ -11,13 +11,19 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class GUIController {
+
+
+    PSQLConnection db = new PSQLConnection();
+    static MainUserAccount m;
 
 
     double offsetX, offsetY;
@@ -32,10 +38,12 @@ public class GUIController {
     private Stage window;
 
     @FXML
-    private Pane passwdForgetNamePane, passwdForgetPhonePane, passwdForgetNewPasswdPane, signUpPane;
+    private Pane passwdForgetNamePane, passwdForgetPhonePane, passwdForgetNewPasswdPane, signUpPane, signupFailPane;
 
     @FXML
     private JFXButton loginButton;
+
+    private JFXButton foo;
 
     @FXML
     private TextField passwdVerifName, signUpNameField, signUpSurnameField, signUpUsernameField, signUpPhoneField, signUpMailField, signUpPasswordField;
@@ -47,7 +55,20 @@ public class GUIController {
     private PasswordField passwdVerifCode, passwdNewPasswd;
 
     @FXML
-    private GridPane serviceGridPane;
+    private VBox serviceVbox;
+
+    @FXML
+    private Label failLoginLabel;
+
+    @FXML
+    private TextField loginUsernameField;
+
+    @FXML
+    private PasswordField loginPasswordField;
+
+    public GUIController() throws SQLException {
+    }
+
 
     // Drag window functions
     @FXML
@@ -63,18 +84,11 @@ public class GUIController {
     }
 
     //Changing Scenes
+    /*
     @FXML
     void changeToScene2(ActionEvent event) throws IOException{
-
-        scene = ((Stage)FXMLLoader.load(getClass().getResource("scene2.fxml"))).getScene();
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        scene.setFill(Color.TRANSPARENT);
-        stage.setScene(scene);
-        stage.show();
-
     }
-
+    */
     @FXML
     void changeToScene1(ActionEvent event) throws IOException {
         scene = ((Stage)FXMLLoader.load(getClass().getResource("gui.fxml"))).getScene();
@@ -175,36 +189,64 @@ public class GUIController {
     }
 
     @FXML
-    void signUpButton() {
-        signUpPane.setVisible(false);
-        loginButton.setDisable(false);
-        forgotPasswdLink.setDisable(false);
-        signUpLink.setDisable(false);
+    void signUpButtonAction() {
+        try {
+            signupFailPane.setVisible(false);
 
-        // ---------
-        // GET TEXTS HERE AND SEND TO THE MAIN USER ACCOUNT
-        // ---------
+            m = new MainUserAccount(db, signUpUsernameField.getText(), signUpPasswordField.getText(),
+                    signUpNameField.getText(), signUpMailField.getText(), signUpPhoneField.getText());
 
-        signUpNameField.clear();
-        signUpSurnameField.clear();
-        signUpUsernameField.clear();
-        signUpPhoneField.clear();
-        signUpMailField.clear();
-        signUpPasswordField.clear();
+            // close the pane
+            signUpPane.setVisible(false);
+            loginButton.setDisable(false);
+            forgotPasswdLink.setDisable(false);
+            signUpLink.setDisable(false);
 
+            // Clear previous values
+            signUpNameField.clear();
+            signUpSurnameField.clear();
+            signUpUsernameField.clear();
+            signUpPhoneField.clear();
+            signUpMailField.clear();
+            signUpPasswordField.clear();
+
+        } catch (Exception e) {
+            signupFailPane.setVisible(true);
+        }
     }
+
+
+    // LOGIN PART
+    @FXML
+    void loginButtonAction(ActionEvent event) {
+        try {
+            failLoginLabel.setVisible(false);
+            UserValidator.validateUser(db, loginUsernameField.getText(), loginPasswordField.getText());
+
+            scene = ((Stage)FXMLLoader.load(getClass().getResource("scene2.fxml"))).getScene();
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+            scene.setFill(Color.TRANSPARENT);
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            failLoginLabel.setVisible(true);
+        }
+    }
+
 
     // ---------------------------------
-
-    static int i = 7;
+    // TEST CODES
     @FXML
-    void addService() {
-        serviceGridPane.addRow(i, new Text(" "));
-        serviceGridPane.autosize();
-
-        i++;
-        System.out.println(i);
-
+    void fooAction() throws SQLException {
+        final int[] i = {0};
+        m.getServices().getHashMap().forEach((serviceName, credentials) -> {
+            foo = (JFXButton) serviceVbox.getChildren().get(i[0]);
+            foo.setText(serviceName);
+            i[0]++;
+        });
     }
+
+
 
 }
