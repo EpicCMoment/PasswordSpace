@@ -155,7 +155,7 @@
                         <Font size="1.0" />
                      </font>
                   </JFXButton>
-                  <Label layoutX="128.0" layoutY="235.0" text="Verification code does not match!" textFill="RED">
+                  <Label layoutX="128.0" layoutY="235.0" text="Verification code does not match!" textFill="RED" visible="false">
                      <font>
                         <Font size="15.0" />
                      </font>
