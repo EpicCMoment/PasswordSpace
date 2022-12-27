@@ -8,9 +8,7 @@ public class Test {
 
             MainUserAccount m = new MainUserAccount(db, "admin");
 
-            m.addNewService("netflix", "sertaki", "anan3");
-            m.addNewService("youtube", "sertaki", "anan3");
-            m.addNewService("facebook", "sertaki", "anan3");
+            m.addNewService("facebook", "kelsertaci", "dayin3");
 
 
         }catch (Exception e) {

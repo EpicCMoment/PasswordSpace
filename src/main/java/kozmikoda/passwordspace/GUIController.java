@@ -3,17 +3,12 @@ package kozmikoda.passwordspace;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -33,41 +28,30 @@ public class GUIController {
 
     @FXML
     private ImageView image;
-
     @FXML
     private Stage window;
-
     @FXML
-    private Pane passwdForgetNamePane, passwdForgetPhonePane, passwdForgetNewPasswdPane, signUpPane, signupFailPane, servicesPane;
-
+    private Pane passwdForgetNamePane, passwdForgetPhonePane, passwdForgetNewPasswdPane, signUpPane, signupFailPane, servicesPane, addServicePane;
     @FXML
     private JFXButton loginButton;
-
-    private JFXButton foo;
-
+    static JFXButton serviceButton, serviceButtons;
     @FXML
-    private TextField passwdVerifName, signUpNameField, signUpSurnameField, signUpUsernameField, signUpPhoneField, signUpMailField, signUpPasswordField;
-
+    private TextField passwdVerifName, signUpNameField, signUpSurnameField, signUpUsernameField, signUpPhoneField, signUpMailField, signUpPasswordField, addServiceNameField, addServiceUserField;
     @FXML
     private Hyperlink forgotPasswdLink, signUpLink;
-
     @FXML
-    private PasswordField passwdVerifCode, passwdNewPasswd;
-
+    private PasswordField passwdVerifCode, passwdNewPasswd, addServicePasswdField;
     @FXML
     private VBox serviceVbox;
-
     @FXML
-    private Label failLoginLabel, passwdUserNotFoundLabel;
-
+    private Label failLoginLabel, passwdUserNotFoundLabel, serviceInsideName, serviceInsidePassword;
     @FXML
     private TextField loginUsernameField;
-
     @FXML
     private PasswordField loginPasswordField;
 
-    public GUIController() throws SQLException {
-    }
+
+    public GUIController() throws SQLException {}
 
 
     // Drag window functions
@@ -83,30 +67,9 @@ public class GUIController {
         offsetY = event.getSceneY();
     }
 
-    //Changing Scenes
-    /*
-    @FXML
-    void changeToScene2(ActionEvent event) throws IOException{
-    }
-    */
-    @FXML
-    void changeToScene1(ActionEvent event) throws IOException {
-        servicesPane.setVisible(false);
 
 
-        /* scene = ((Stage)FXMLLoader.load(getClass().getResource("gui.fxml"))).getScene();
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        scene.setFill(Color.TRANSPARENT);
-        stage.setScene(scene);
-        stage.show();
-        */
-
-
-    }
-
-
-    // Close button method
+    // Close button
     @FXML
     protected void closeButton(ActionEvent event) {
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
@@ -114,11 +77,12 @@ public class GUIController {
 
     }
 
-    // ---------------------------------------------
-    // FORGOT PASSWORD
+
+    // FORGOT PASSWORD PART
     @FXML
     void forgetPasswdButton() {
         passwdForgetNamePane.setVisible(true);
+        passwdUserNotFoundLabel.setVisible(false);
         loginButton.setDisable(true);
         forgotPasswdLink.setDisable(true);
         signUpLink.setDisable(true);
@@ -127,6 +91,7 @@ public class GUIController {
     @FXML
     void forgetPasswdBackButton() {
         passwdForgetNamePane.setVisible(false);
+        passwdUserNotFoundLabel.setVisible(false);
         loginButton.setDisable(false);
         forgotPasswdLink.setDisable(false);
         signUpLink.setDisable(false);
@@ -137,6 +102,7 @@ public class GUIController {
     void forgetPasswdBackButton2() {
         passwdForgetPhonePane.setVisible(false);
         passwdForgetNamePane.setVisible(true);
+        passwdUserNotFoundLabel.setVisible(false);
         passwdVerifCode.clear();
     }
 
@@ -146,10 +112,10 @@ public class GUIController {
     void sendVerificationButton() {
         try {
             passwdUserNotFoundLabel.setVisible(false);
+            m = new MainUserAccount(db, passwdVerifName.getText());
 
             passwdForgetNamePane.setVisible(false);
             passwdForgetPhonePane.setVisible(true);
-            m = new MainUserAccount(db, passwdVerifName.getText());
 
         } catch (Exception e) {
             passwdUserNotFoundLabel.setVisible(true);
@@ -184,6 +150,7 @@ public class GUIController {
     @FXML
     void signUpLinkAction() {
         signUpPane.setVisible(true);
+        signupFailPane.setVisible(false);
         loginButton.setDisable(true);
         forgotPasswdLink.setDisable(true);
         signUpLink.setDisable(true);
@@ -192,6 +159,7 @@ public class GUIController {
     @FXML
     void signUpBackButton() {
         signUpPane.setVisible(false);
+        signupFailPane.setVisible(false);
         loginButton.setDisable(false);
         forgotPasswdLink.setDisable(false);
         signUpLink.setDisable(false);
@@ -217,6 +185,7 @@ public class GUIController {
 
             // close the pane
             signUpPane.setVisible(false);
+            signupFailPane.setVisible(false);
             loginButton.setDisable(false);
             forgotPasswdLink.setDisable(false);
             signUpLink.setDisable(false);
@@ -231,26 +200,46 @@ public class GUIController {
 
         } catch (Exception e) {
             signupFailPane.setVisible(true);
-            e.printStackTrace();
         }
     }
 
 
     // LOGIN PART
+
     @FXML
     void loginButtonAction() {
+        String[][] services = new String[9][3];
+
         try {
             failLoginLabel.setVisible(false);
             UserValidator.validateUser(db, loginUsernameField.getText(), loginPasswordField.getText());
             servicesPane.setVisible(true);
 
             m = new MainUserAccount(db, loginUsernameField.getText());
-            final int[] i = {0};
+            final int[] loginIT = {0};
             m.getServices().getHashMap().forEach((serviceName, credentials) -> {
-                foo = (JFXButton) serviceVbox.getChildren().get(i[0]);
-                foo.setText(serviceName);
-                i[0]++;
+                serviceButton = (JFXButton) serviceVbox.getChildren().get(loginIT[0]);
+                serviceButton.setText(serviceName);
+                loginIT[0]++;
             });
+
+
+                int[] j = {0};
+                m.getServices().getHashMap().forEach((serviceName, credentials) -> {
+                    services[j[0]][1] = credentials.getKey();
+                    services[j[0]][2] = credentials.getValue();
+                    j[0]++;
+                });
+
+
+                for (int k = 0; k < 9; k++) {
+                    int finalK = k;
+                    ((JFXButton) serviceVbox.getChildren().get(k)).setOnAction(e -> {
+                        serviceInsideName.setText(services[finalK][1]);
+                        serviceInsidePassword.setText(services[finalK][2]);
+                    });
+                }
+
         /*
             scene = ((Stage)FXMLLoader.load(getClass().getResource("scene2.fxml"))).getScene();
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -266,8 +255,67 @@ public class GUIController {
     }
 
 
+    @FXML
+    void servicesBackButton() {
+        addServicePane.setVisible(false);
+        addServiceNameField.clear();
+        addServicePasswdField.clear();
+        addServiceUserField.clear();
+    }
+
+    @FXML
+    void addServicePaneOpenerButton() {
+        addServicePane.setVisible(true);
+    }
+
+    @FXML
+    void addServiceButton() throws SQLException {
+        m.addNewService(addServiceNameField.getText(), addServiceUserField.getText(), addServicePasswdField.getText());
+        final int[] serviceIT = {0};
+        m.getServices().getHashMap().forEach((serviceName, credentials) -> {
+            serviceButton = (JFXButton) serviceVbox.getChildren().get(serviceIT[0]);
+            serviceButton.setText(serviceName);
+            serviceIT[0]++;
+        });
+
+        loginButtonAction();
+
+        addServiceNameField.clear();
+        addServicePasswdField.clear();
+        addServiceUserField.clear();
+
+
+    }
+
+    @FXML
+    void changeToScene1(ActionEvent event) throws IOException {
+        servicesPane.setVisible(false);
+        serviceInsideName.setText("");
+        serviceInsidePassword.setText("");
+        loginUsernameField.clear();
+        loginPasswordField.clear();
+
+        for(int i = 0; i < 9; i++) {
+            serviceButton = (JFXButton) serviceVbox.getChildren().get(i);
+            serviceButton.setText("");
+        }
+
+
+
+
+        /* scene = ((Stage)FXMLLoader.load(getClass().getResource("gui.fxml"))).getScene();
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        scene.setFill(Color.TRANSPARENT);
+        stage.setScene(scene);
+        stage.show();
+        */
+
+
+    }
     // ---------------------------------
     // TEST CODES
+    /*
     @FXML
     void fooAction() throws SQLException {
         final int[] i = {0};
@@ -276,12 +324,6 @@ public class GUIController {
             foo.setText(serviceName);
             i[0]++;
         });
-
-
     }
-
-
-
-
-
+    */
 }

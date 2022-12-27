@@ -3,7 +3,6 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.Scene?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -29,11 +28,6 @@
                      </image>
                   </ImageView>
                   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="144.0" layoutY="418.0" prefHeight="28.0" prefWidth="147.0" snapToPixel="false" text="You are not a member?" textFill="WHITE" />
-                  <JFXButton fx:id="loginButton" buttonType="RAISED" layoutX="189.0" layoutY="366.0" onAction="#loginButtonAction" prefHeight="38.0" prefWidth="95.0" style="-fx-background-color: #1D90F4; -fx-background-radius: 20;" text="Login" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </JFXButton>
                   <ImageView fitHeight="78.0" fitWidth="482.0" layoutX="205.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@mainText.png" />
@@ -69,13 +63,18 @@
                         <PasswordField fx:id="loginPasswordField" alignment="CENTER" layoutX="24.0" layoutY="33.0" prefHeight="25.0" prefWidth="212.0" styleClass="password" stylesheets="@style.css" />
                      </children>
                   </Group>
+                  <JFXButton fx:id="loginButton" buttonType="RAISED" layoutX="189.0" layoutY="366.0" onAction="#loginButtonAction" prefHeight="38.0" prefWidth="95.0" style="-fx-background-color: #1D90F4; -fx-background-radius: 20;" text="Sign In" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </JFXButton>
+                  <Hyperlink fx:id="signUpLink" layoutX="286.0" layoutY="420.0" onAction="#signUpLinkAction" snapToPixel="false" styleClass="signlink" stylesheets="@style.css" text="Sign Up" textFill="#42b3ff" />
+                  <Hyperlink fx:id="forgotPasswdLink" layoutX="188.0" layoutY="452.0" onAction="#forgetPasswdButton" snapToPixel="false" styleClass="signlink" stylesheets="@style.css" text="Forgot password?" textFill="#42b3ff" />
                   <ImageView fitHeight="159.0" fitWidth="358.0" layoutX="446.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@Claim.png" />
                      </image>
                   </ImageView>
-                  <Hyperlink fx:id="signUpLink" layoutX="286.0" layoutY="420.0" onAction="#signUpLinkAction" snapToPixel="false" styleClass="signlink" stylesheets="@style.css" text="Sign Up" textFill="#42b3ff" />
-                  <Hyperlink fx:id="forgotPasswdLink" layoutX="188.0" layoutY="452.0" onAction="#forgetPasswdButton" snapToPixel="false" styleClass="signlink" stylesheets="@style.css" text="Forgot password?" textFill="#42b3ff" />
                   <Label fx:id="failLoginLabel" layoutX="138.0" layoutY="340.0" text="Incorrect username or password" textFill="RED" visible="false">
                      <font>
                         <Font size="14.0" />
@@ -83,7 +82,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="passwdForgetNewPasswdPane" layoutX="151.0" layoutY="115.0" prefHeight="296.0" prefWidth="447.0" style="-fx-background-radius: 20;" styleClass="forgetPasswdNamePane" stylesheets="@style.css" visible="false">
+            <Pane fx:id="passwdForgetNewPasswdPane" layoutX="210.0" layoutY="150.0" prefHeight="296.0" prefWidth="447.0" style="-fx-background-radius: 20;" styleClass="forgetPasswdNamePane" stylesheets="@style.css" visible="false">
                <children>
                   <ImageView fitHeight="300.0" fitWidth="485.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -120,7 +119,7 @@
                   <PasswordField fx:id="passwdNewPasswd" alignment="CENTER" layoutX="129.0" layoutY="141.0" prefHeight="25.0" prefWidth="214.0" styleClass="password" stylesheets="@style.css" />
                </children>
             </Pane>
-            <Pane fx:id="passwdForgetPhonePane" layoutX="151.0" layoutY="115.0" prefHeight="296.0" prefWidth="447.0" style="-fx-background-radius: 20;" styleClass="forgetPasswdNamePane" stylesheets="@style.css" visible="false">
+            <Pane fx:id="passwdForgetPhonePane" layoutX="210.0" layoutY="150.0" prefHeight="296.0" prefWidth="447.0" style="-fx-background-radius: 20;" styleClass="forgetPasswdNamePane" stylesheets="@style.css" visible="false">
                <children>
                   <ImageView fitHeight="300.0" fitWidth="485.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -169,7 +168,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="passwdForgetNamePane" layoutX="151.0" layoutY="115.0" prefHeight="296.0" prefWidth="447.0" style="-fx-background-radius: 20;" styleClass="forgetPasswdNamePane" stylesheets="@style.css" visible="false">
+            <Pane fx:id="passwdForgetNamePane" layoutX="210.0" layoutY="150.0" prefHeight="296.0" prefWidth="447.0" style="-fx-background-radius: 20;" styleClass="forgetPasswdNamePane" stylesheets="@style.css" visible="false">
                <children>
                   <ImageView fitHeight="300.0" fitWidth="485.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -214,7 +213,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="signUpPane" layoutX="46.0" layoutY="35.0" prefHeight="429.0" prefWidth="637.0" style="-fx-background-radius: 20;" styleClass="forgetPasswdNamePane" stylesheets="@style.css" visible="false">
+            <Pane fx:id="signUpPane" layoutX="115.0" layoutY="80.0" prefHeight="429.0" prefWidth="637.0" style="-fx-background-radius: 20;" styleClass="forgetPasswdNamePane" stylesheets="@style.css" visible="false">
                <children>
                   <ImageView fitHeight="428.0" fitWidth="631.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -270,7 +269,7 @@
                   </Pane>
                </children>
             </Pane>
-            <Pane fx:id="servicesPane" prefHeight="582.0" prefWidth="865.0">
+            <Pane fx:id="servicesPane" prefHeight="582.0" prefWidth="865.0" visible="false">
                <children>
                   <ImageView fitHeight="580.0" fitWidth="863.0" onMouseDragged="#dragWindow" onMousePressed="#setWindowOffset" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -291,21 +290,82 @@
                      <children>
                         <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" />
                         <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" />
-                        <JFXButton prefHeight="49.0" prefWidth="314.0" textFill="WHITE" />
-                        <JFXButton prefHeight="49.0" prefWidth="314.0" textFill="WHITE" />
-                        <JFXButton prefHeight="49.0" prefWidth="314.0" textFill="WHITE" />
-                        <JFXButton prefHeight="49.0" prefWidth="314.0" textFill="WHITE" />
-                        <JFXButton prefHeight="49.0" prefWidth="314.0" textFill="WHITE" />
-                        <JFXButton prefHeight="49.0" prefWidth="314.0" textFill="WHITE" />
-                        <JFXButton prefHeight="49.0" prefWidth="314.0" textFill="WHITE" />
+                        <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" />
+                        <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" />
+                        <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" />
+                        <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" />
+                        <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" />
+                        <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" />
+                        <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" />
                      </children>
                   </VBox>
                   <JFXButton layoutX="205.0" layoutY="26.0" opacity="0.0" prefHeight="49.0" prefWidth="36.0" textFill="WHITE" />
-                  <Button layoutX="702.0" layoutY="26.0" mnemonicParsing="false" onAction="#changeToScene1" text="Button" />
                   <JFXButton layoutX="24.0" layoutY="24.0" opacity="0.0" />
+                  <Label fx:id="serviceInsideName" layoutX="404.0" layoutY="104.0" text="Label" textFill="WHITE" />
+                  <Label fx:id="serviceInsidePassword" layoutX="404.0" layoutY="148.0" text="Label" textFill="WHITE" />
+                  <Pane fx:id="addServicePane" layoutX="223.0" layoutY="121.0" prefHeight="296.0" prefWidth="447.0" style="-fx-background-radius: 20;" styleClass="forgetPasswdNamePane" stylesheets="@style.css" visible="false">
+                     <children>
+                        <ImageView fitHeight="300.0" fitWidth="485.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@loginBackgroundImage.png" />
+                           </image>
+                           <effect>
+                              <DropShadow>
+                                 <input>
+                                    <ColorAdjust brightness="-0.18" />
+                                 </input>
+                              </DropShadow>
+                           </effect>
+                        </ImageView>
+                        <JFXButton layoutX="20.0" layoutY="20.0" onAction="#servicesBackButton" prefHeight="25.0" prefWidth="16.0" styleClass="backButton" stylesheets="@style.css" textFill="WHITE">
+                           <font>
+                              <Font size="1.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton buttonType="RAISED" layoutX="149.0" layoutY="232.0" onAction="#addServiceButton" prefHeight="38.0" prefWidth="149.0" style="-fx-background-color: #2f87d6; -fx-background-radius: 20;" text="Add Service" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </JFXButton>
+                        <ImageView fitHeight="79.0" fitWidth="176.0" layoutX="39.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@passwdBorder.png" />
+                           </image>
+                        </ImageView>
+                        <TextField fx:id="addServiceNameField" alignment="CENTER" layoutX="52.0" layoutY="108.0" prefHeight="25.0" prefWidth="151.0" styleClass="forgetPasswdNameField" stylesheets="@style.css" />
+                        <Label layoutX="152.0" layoutY="18.0" prefHeight="50.0" prefWidth="169.0" text="Add Service" textFill="WHITE">
+                           <font>
+                              <Font name="Agency FB" size="44.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="59.0" fitWidth="220.0" layoutX="128.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@passwdBorder.png" />
+                           </image>
+                        </ImageView>
+                        <PasswordField fx:id="addServicePasswdField" alignment="CENTER" layoutX="136.0" layoutY="165.0" prefHeight="25.0" prefWidth="175.0" styleClass="password" stylesheets="@style.css" />
+                        <ImageView fitHeight="79.0" fitWidth="176.0" layoutX="232.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@passwdBorder.png" />
+                           </image>
+                        </ImageView>
+                        <TextField fx:id="addServiceUserField" alignment="CENTER" layoutX="245.0" layoutY="108.0" prefHeight="25.0" prefWidth="151.0" styleClass="forgetPasswdNameField" stylesheets="@style.css" />
+                     </children>
+                  </Pane>
+                  <JFXButton buttonType="RAISED" layoutX="132.0" layoutY="100.0" onAction="#addServicePaneOpenerButton" text="ADD SERVICE" textFill="WHITE" />
+                  <JFXButton buttonType="RAISED" layoutX="690.0" layoutY="35.0" onAction="#changeToScene1" prefHeight="27.0" prefWidth="68.0" style="-fx-background-color: #c73232; -fx-background-radius: 20;" text="Sign Out" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </JFXButton>
                </children>
             </Pane>
-            <JFXButton layoutX="807.0" layoutY="27.0" onAction="#closeButton" prefHeight="27.0" prefWidth="15.0" styleClass="closeButton" stylesheets="@style.css" textFill="WHITE">
+            <JFXButton layoutX="775.0" layoutY="35.0" onAction="#closeButton" prefHeight="27.0" prefWidth="15.0" ripplerFill="#668fe1" styleClass="minimizeButton" stylesheets="@style.css" textFill="WHITE">
+               <font>
+                  <Font size="1.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="805.0" layoutY="33.0" onAction="#closeButton" prefHeight="27.0" prefWidth="15.0" ripplerFill="#fc4646" styleClass="closeButton" stylesheets="@style.css" textFill="WHITE">
                <font>
                   <Font size="1.0" />
                </font>

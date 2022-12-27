@@ -25,6 +25,10 @@
     -fx-graphic: url(closeButton.png);
 }
 
+.minimizeButton {
+    -fx-graphic: url(minimizeButton.png);
+}
+
 .password {
     -fx-background-color: transparent;
     -fx-text-fill: #FFFFFF;

@@ -1,5 +1,6 @@
 package kozmikoda.passwordspace;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -27,7 +28,7 @@ public class GUIRunner extends Application{
 
         Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
 
-        window.setX(screenBounds.getWidth()/3.5);
+        window.setX(screenBounds.getWidth()/3.8);
         window.setY(screenBounds.getHeight()/4.5);
 
 
