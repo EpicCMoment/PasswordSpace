@@ -222,6 +222,10 @@ public class GUIController {
     void loginButtonAction() {
         String[][] services = new String[serviceVbox.getChildren().size()][3];
 
+        if (showPasswdFlag) {
+            loginPasswordField.setText(passwdShowText.getText());
+        }
+
         try {
             failLoginLabel.setVisible(false);
             UserValidator.validateUser(db, loginUsernameField.getText(), loginPasswordField.getText());
@@ -398,20 +402,4 @@ public class GUIController {
         serviceNameShower.setVisible(false);
 
     }
-
-
-
-    // ---------------------------------
-    // TEST CODES
-    /*
-    @FXML
-    void fooAction() throws SQLException {
-        final int[] i = {0};
-        m.getServices().getHashMap().forEach((serviceName, credentials) -> {
-            foo = (JFXButton) serviceVbox.getChildren().get(i[0]);
-            foo.setText(serviceName);
-            i[0]++;
-        });
-    }
-    */
 }
