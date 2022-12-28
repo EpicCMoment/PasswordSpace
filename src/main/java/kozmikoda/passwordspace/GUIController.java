@@ -54,25 +54,22 @@ public class GUIController {
     private PasswordField loginPasswordField, serviceInsidePassword;
 
 
-
-
+    // Default constructor with empty body
     public GUIController() throws SQLException {}
 
-
-    // Drag window functions
+    // Drag window setter
     @FXML
     void dragWindow(MouseEvent event) {
         window.setX(event.getScreenX() - offsetX);
         window.setY(event.getScreenY() - offsetY);
     }
 
+    // Set window according to the drag operation
     @FXML
     public void setWindowOffset(MouseEvent event) {
         offsetX = event.getSceneX();
         offsetY = event.getSceneY();
     }
-
-
 
     // Close button
     @FXML
@@ -92,6 +89,7 @@ public class GUIController {
     // FORGOT PASSWORD PART
     @FXML
     void forgetPasswdButton() {
+        // GUI stuff below
         passwdForgetNamePane.setVisible(true);
         passwdUserNotFoundLabel.setVisible(false);
         loginButton.setDisable(true);
@@ -99,8 +97,10 @@ public class GUIController {
         signUpLink.setDisable(true);
     }
 
+    // Back button1
     @FXML
     void forgetPasswdBackButton() {
+        // GUI stuff below
         passwdForgetNamePane.setVisible(false);
         passwdUserNotFoundLabel.setVisible(false);
         loginButton.setDisable(false);
@@ -109,8 +109,10 @@ public class GUIController {
         passwdVerifName.clear();
     }
 
+    // Back button2
     @FXML
     void forgetPasswdBackButton2() {
+        // GUI stuff below
         passwdForgetPhonePane.setVisible(false);
         passwdForgetNamePane.setVisible(true);
         passwdUserNotFoundLabel.setVisible(false);
@@ -134,19 +136,20 @@ public class GUIController {
 
     }
 
-    // Reset passwd page
+    // Actual reset password page
     @FXML
     void verifyButton() {
         passwdForgetPhonePane.setVisible(false);
         passwdForgetNewPasswdPane.setVisible(true);
     }
 
-    // After passwd reset
+    // After password reset button clicked
     @FXML
     void resetPasswdButton() throws SQLException {
-
+        // Updating SQL password
         m.updatePassword(passwdNewPasswd.getText());
 
+        // GUI stuff below
         passwdForgetNewPasswdPane.setVisible(false);
         loginButton.setDisable(false);
         forgotPasswdLink.setDisable(false);
@@ -155,11 +158,11 @@ public class GUIController {
     }
 
 
-    // ----------------------------------------------------
 
     // SIGN UP PART
     @FXML
     void signUpLinkAction() {
+        // Open the panes
         signUpPane.setVisible(true);
         signupFailPane.setVisible(false);
         loginButton.setDisable(true);
@@ -169,6 +172,7 @@ public class GUIController {
 
     @FXML
     void signUpBackButton() {
+        // Close the panes
         signUpPane.setVisible(false);
         signupFailPane.setVisible(false);
         loginButton.setDisable(false);
@@ -187,14 +191,15 @@ public class GUIController {
     @FXML
     void signUpButtonAction() {
         try {
-            signupFailPane.setVisible(false);
-
+            // New SQL connection
             db = new PSQLConnection();
 
+            // Registering to the database according to signup info
             m = new MainUserAccount(db, signUpUsernameField.getText(), signUpPasswordField.getText(),
                     signUpNameField.getText(), signUpMailField.getText(), signUpPhoneField.getText());
 
-            // close the pane
+            // Close the pane. And other GUI stuff below
+            signupFailPane.setVisible(false);
             signUpPane.setVisible(false);
             signupFailPane.setVisible(false);
             loginButton.setDisable(false);
@@ -215,23 +220,31 @@ public class GUIController {
     }
 
 
-    // LOGIN PART
+    // LOG IN (SIGN IN) PART
     JFXButton lastClickedService;
     static boolean lastClicked = false;
+
     @FXML
     void loginButtonAction() {
         String[][] services = new String[serviceVbox.getChildren().size()][3];
 
+        // Check the show password flag
         if (showPasswdFlag) {
             loginPasswordField.setText(passwdShowText.getText());
         }
 
         try {
-            failLoginLabel.setVisible(false);
+            // Check the username and password
             UserValidator.validateUser(db, loginUsernameField.getText(), loginPasswordField.getText());
-            servicesPane.setVisible(true);
 
+            // GUI stuff below
+            servicesPane.setVisible(true);
+            failLoginLabel.setVisible(false);
+
+            // Connect the user's database
             m = new MainUserAccount(db, loginUsernameField.getText());
+
+            // Get service info from the database
             final int[] loginIT = {0};
             m.getServices().getHashMap().forEach((serviceName, credentials) -> {
                 serviceButton = (JFXButton) serviceVbox.getChildren().get(loginIT[0]);
@@ -242,31 +255,34 @@ public class GUIController {
                 loginIT[0]++;
             });
 
+            // Set service info to text-fields and labels
+            // TL;DR: Lots of GUI stuff below
+            for (int k = 0; k < serviceVbox.getChildren().size(); k++) {
+                int finalK = k;
+                ((JFXButton) serviceVbox.getChildren().get(k)).setOnAction(e -> {
+                    lastClicked = true;
+                    serviceInsideName.setText(services[finalK][1]);
+                    serviceInsidePassword.setText(services[finalK][2]);
+                    lastClickedService =  ((JFXButton) serviceVbox.getChildren().get(finalK));
 
-                for (int k = 0; k < serviceVbox.getChildren().size(); k++) {
-                    int finalK = k;
-                    ((JFXButton) serviceVbox.getChildren().get(k)).setOnAction(e -> {
-                        lastClicked = true;
-                        serviceInsideName.setText(services[finalK][1]);
-                        serviceInsidePassword.setText(services[finalK][2]);
-                        lastClickedService =  ((JFXButton) serviceVbox.getChildren().get(finalK));
-                        if(lastClickedService.getText().equals("")) {
-                            serviceInsidePane.setVisible(false);
-                            deleteServiceButton.setVisible(false);
-                            serviceNameShower.setVisible(false);
-                        }
-                        else {
-                            serviceNameShower.setVisible(true);
-                            serviceNameShower.setText(lastClickedService.getText());
-                            deleteServiceButton.setVisible(true);
-                            serviceInsidePane.setVisible(true);
-                            openinInfoPane.setVisible(false);
-                            welcomeLabel.setVisible(false);
-                        }
+                    if(lastClickedService.getText().equals("")) {
+                        serviceInsidePane.setVisible(false);
+                        deleteServiceButton.setVisible(false);
+                        serviceNameShower.setVisible(false);
+                    }
+                    else {
+                        serviceNameShower.setVisible(true);
+                        serviceNameShower.setText(lastClickedService.getText());
+                        deleteServiceButton.setVisible(true);
+                        serviceInsidePane.setVisible(true);
+                        openinInfoPane.setVisible(false);
+                        welcomeLabel.setVisible(false);
+                    }
 
-                    });
-                }
+                });
+            }
 
+            // Another GUI stuff below
             openinInfoPane.setVisible(true);
             welcomeLabel.setVisible(true);
             deleteServiceButton.setVisible(false);
@@ -276,107 +292,7 @@ public class GUIController {
         }
     }
 
-
-    @FXML
-    void servicesBackButton() {
-        addServicePane.setVisible(false);
-        addServiceNameField.clear();
-        addServicePasswdField.clear();
-        addServiceUserField.clear();
-        servicesPane.setDisable(false);
-
-    }
-
-    @FXML
-    void addServicePaneOpenerButton() {
-        addServicePane.setVisible(true);
-        servicesPane.setDisable(true);
-    }
-
-    @FXML
-    void addServiceButton() throws SQLException {
-        m.addNewService(addServiceNameField.getText(), addServiceUserField.getText(), addServicePasswdField.getText());
-        final int[] serviceIT = {0};
-        m.getServices().getHashMap().forEach((serviceName, credentials) -> {
-            serviceButton = (JFXButton) serviceVbox.getChildren().get(serviceIT[0]);
-            serviceButton.setText(serviceName);
-            serviceButton.setVisible(true);
-            serviceIT[0]++;
-        });
-
-        loginButtonAction();
-
-        if (lastClicked) {
-            welcomeLabel.setVisible(false);
-            openinInfoPane.setVisible(false);
-            deleteServiceButton.setVisible(true);
-
-        }
-        else {
-            welcomeLabel.setVisible(true);
-            openinInfoPane.setVisible(true);
-            deleteServiceButton.setVisible(false);
-        }
-
-
-        addServiceNameField.clear();
-        addServicePasswdField.clear();
-        addServiceUserField.clear();
-    }
-
-
-
-    @FXML
-    void deleteServicePaneOpenerButton() {
-        deleteServicePane.setVisible(true);
-        servicesPane.setDisable(true);
-        deleteServiceName.setText("\"" + lastClickedService.getText() + "\"");
-    }
-
-    @FXML
-    void deleteServiceNoButton() {
-        deleteServicePane.setVisible(false);
-        servicesPane.setDisable(false);
-        deleteServiceName.setText("");
-    }
-
-    @FXML
-    void deleteServiceYesButton() throws SQLException {
-        m.removeService(lastClickedService.getText());
-        lastClickedService.setText(" ");
-        deleteServiceButton.setVisible(false);
-        servicesPane.setDisable(false);
-        serviceInsidePane.setVisible(false);
-        deleteServicePane.setVisible(false);
-        serviceNameShower.setVisible(false);
-        openinInfoPane.setVisible(true);
-        for(int i = 0; i < serviceVbox.getChildren().size(); i++) {
-            serviceButton = (JFXButton) serviceVbox.getChildren().get(i);
-            serviceButton.setText("");
-        }
-        loginButtonAction();
-        welcomeLabel.setVisible(false);
-    }
-
-
-    @FXML
-    void signOutButton(ActionEvent event) throws IOException {
-        servicesPane.setVisible(false);
-        lastClicked = false;
-        serviceInsideName.setText("");
-        serviceInsidePassword.setText("");
-        loginUsernameField.clear();
-        loginPasswordField.clear();
-        passwdShowText.clear();
-        serviceNameShower.setVisible(false);
-        serviceInsidePane.setVisible(false);
-
-        for(int i = 0; i < serviceVbox.getChildren().size(); i++) {
-            serviceButton = (JFXButton) serviceVbox.getChildren().get(i);
-            serviceButton.setText("");
-        }
-    }
-
+    // Show password button in the log in (sign in) part
     static boolean showPasswdFlag = false;
     @FXML
     void signinShowPasswordButton() {
@@ -394,6 +310,129 @@ public class GUIController {
         }
     }
 
+    // Inside services back button
+    @FXML
+    void servicesBackButton() {
+        // GUI stuff below
+        addServicePane.setVisible(false);
+        addServiceNameField.clear();
+        addServicePasswdField.clear();
+        addServiceUserField.clear();
+        servicesPane.setDisable(false);
+    }
+
+    // Open add service pane
+    @FXML
+    void addServicePaneOpenerButton() {
+        // GUI stuff below
+        addServicePane.setVisible(true);
+        servicesPane.setDisable(true);
+    }
+
+
+    // Adding services to the database
+    @FXML
+    void addServiceButton() throws SQLException {
+        // Add service to the database
+        m.addNewService(addServiceNameField.getText(), addServiceUserField.getText(), addServicePasswdField.getText());
+
+        // Update the GUI for service names
+        final int[] serviceIT = {0};
+        m.getServices().getHashMap().forEach((serviceName, credentials) -> {
+            serviceButton = (JFXButton) serviceVbox.getChildren().get(serviceIT[0]);
+            serviceButton.setText(serviceName);
+            serviceButton.setVisible(true);
+            serviceIT[0]++;
+        });
+
+        loginButtonAction();
+
+        // GUI stuff below
+        if (lastClicked) {
+            welcomeLabel.setVisible(false);
+            openinInfoPane.setVisible(false);
+            deleteServiceButton.setVisible(true);
+
+        }
+        else {
+            welcomeLabel.setVisible(true);
+            openinInfoPane.setVisible(true);
+            deleteServiceButton.setVisible(false);
+        }
+
+        addServiceNameField.clear();
+        addServicePasswdField.clear();
+        addServiceUserField.clear();
+    }
+
+
+    // Delete services part
+
+    // Delete service yes no pane opener
+    @FXML
+    void deleteServicePaneOpenerButton() {
+        deleteServicePane.setVisible(true);
+        servicesPane.setDisable(true);
+        deleteServiceName.setText("\"" + lastClickedService.getText() + "\"");
+    }
+
+    // Delete service no button
+    // TL;DR: GUI stuff below
+    @FXML
+    void deleteServiceNoButton() {
+        deleteServicePane.setVisible(false);
+        servicesPane.setDisable(false);
+        deleteServiceName.setText("");
+    }
+
+    // Delete service yes button
+    @FXML
+    void deleteServiceYesButton() throws SQLException {
+        // Remove service from database according to the last clicked service
+        m.removeService(lastClickedService.getText());
+
+        // GUI stuff below
+        lastClickedService.setText(" ");
+        deleteServiceButton.setVisible(false);
+        servicesPane.setDisable(false);
+        serviceInsidePane.setVisible(false);
+        deleteServicePane.setVisible(false);
+        serviceNameShower.setVisible(false);
+        openinInfoPane.setVisible(true);
+
+        // Clear the buttons
+        for(int i = 0; i < serviceVbox.getChildren().size(); i++) {
+            serviceButton = (JFXButton) serviceVbox.getChildren().get(i);
+            serviceButton.setText("");
+        }
+
+        // Set back to login position
+        loginButtonAction();
+        welcomeLabel.setVisible(false);
+    }
+
+    // Sign out part
+    @FXML
+    void signOutButton(ActionEvent event) throws IOException {
+        // GUI stuff below
+        servicesPane.setVisible(false);
+        lastClicked = false;
+        serviceInsideName.setText("");
+        serviceInsidePassword.setText("");
+        loginUsernameField.clear();
+        loginPasswordField.clear();
+        passwdShowText.clear();
+        serviceNameShower.setVisible(false);
+        serviceInsidePane.setVisible(false);
+
+        // Clear the buttons
+        for(int i = 0; i < serviceVbox.getChildren().size(); i++) {
+            serviceButton = (JFXButton) serviceVbox.getChildren().get(i);
+            serviceButton.setText("");
+        }
+    }
+
+    // GUI stuff for cool things (not cool btw)
     @FXML
     void servicesBigButton() {
         deleteServiceButton.setVisible(false);
