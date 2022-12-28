@@ -66,12 +66,12 @@
                         <JFXCheckBox fx:id="signinShowPassword" layoutX="77.0" layoutY="73.0" onAction="#signinShowPasswordButton" prefHeight="18.0" prefWidth="93.0" text="Show Password" textFill="WHITE" unCheckedColor="WHITE" />
                      </children>
                   </Group>
-                  <JFXButton fx:id="loginButton" buttonType="RAISED" layoutX="190.0" layoutY="391.0" onAction="#loginButtonAction" prefHeight="38.0" prefWidth="95.0" style="-fx-background-color: #1D90F4; -fx-background-radius: 20;" text="Sign In" textFill="WHITE">
+                  <JFXButton fx:id="loginButton" buttonType="RAISED" layoutX="190.0" layoutY="391.0" onAction="#loginButtonAction" prefHeight="38.0" prefWidth="95.0" style="-fx-background-color: #1D90F4; -fx-background-radius: 20;" text="Sign in" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </JFXButton>
-                  <Hyperlink fx:id="signUpLink" layoutX="287.0" layoutY="445.0" onAction="#signUpLinkAction" snapToPixel="false" styleClass="signlink" stylesheets="@style.css" text="Sign Up" textFill="#42b3ff" />
+                  <Hyperlink fx:id="signUpLink" layoutX="287.0" layoutY="445.0" onAction="#signUpLinkAction" snapToPixel="false" styleClass="signlink" stylesheets="@style.css" text="Sign up" textFill="#42b3ff" />
                   <Hyperlink fx:id="forgotPasswdLink" layoutX="189.0" layoutY="477.0" onAction="#forgetPasswdButton" snapToPixel="false" styleClass="signlink" stylesheets="@style.css" text="Forgot password?" textFill="#42b3ff" />
                   <ImageView fitHeight="159.0" fitWidth="358.0" layoutX="446.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -279,7 +279,7 @@
                         <Image url="@appInside.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="56.0" fitWidth="254.0" layoutX="629.0" layoutY="504.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="49.0" fitWidth="202.0" layoutX="655.0" layoutY="511.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@passwordSpace.png" />
                      </image>
@@ -299,24 +299,22 @@
                   </VBox>
                   <JFXButton layoutX="520.0" layoutY="27.0" opacity="0.0" prefHeight="49.0" prefWidth="36.0" textFill="WHITE" />
                   <JFXButton layoutX="24.0" layoutY="24.0" opacity="0.0" />
-                  <Label fx:id="serviceInsideName" layoutX="404.0" layoutY="104.0" text="Label" textFill="WHITE" />
-                  <Label fx:id="serviceInsidePassword" layoutX="404.0" layoutY="148.0" text="Label" textFill="WHITE" />
-                  <JFXButton fx:id="deleteServiceButton" buttonType="RAISED" layoutX="556.0" layoutY="371.0" onAction="#deleteServicePaneOpenerButton" prefHeight="43.0" prefWidth="134.0" style="-fx-background-color: #d41056; -fx-background-radius: 20;" text="Delete the Service" textFill="WHITE">
+                  <JFXButton fx:id="deleteServiceButton" buttonType="RAISED" layoutX="535.0" layoutY="410.0" onAction="#deleteServicePaneOpenerButton" prefHeight="43.0" prefWidth="134.0" style="-fx-background-color: #d41056; -fx-background-radius: 20;" text="Delete the Service" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" layoutX="683.0" layoutY="32.0" onAction="#signOutButton" prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: #c73200; -fx-background-radius: 20;" text="Sign Out" textFill="WHITE">
+                  <JFXButton buttonType="RAISED" layoutX="683.0" layoutY="32.0" onAction="#signOutButton" prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: #c73200; -fx-background-radius: 20;" text="Sign out" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" layoutX="128.0" layoutY="98.0" onAction="#addServicePaneOpenerButton" prefHeight="34.0" prefWidth="98.0" style="-fx-background-color: #2371a1; -fx-background-radius: 20;" text="New Service" textFill="WHITE">
+                  <JFXButton buttonType="RAISED" layoutX="128.0" layoutY="105.0" onAction="#addServicePaneOpenerButton" prefHeight="34.0" prefWidth="98.0" style="-fx-background-color: #2371a1; -fx-background-radius: 20;" text="New Service" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </JFXButton>
-                  <Pane fx:id="openinInfoPane" layoutX="373.0" layoutY="111.0">
+                  <Pane fx:id="openinInfoPane" layoutX="373.0" layoutY="170.0">
                      <children>
                         <Label layoutX="9.0" layoutY="9.0" prefHeight="34.0" prefWidth="441.0" text="To see the contents of a service, select a service from the left menu." textFill="WHITE">
                            <font>
@@ -326,7 +324,7 @@
                               <DropShadow spread="0.43" />
                            </effect>
                         </Label>
-                        <Label layoutX="31.0" layoutY="45.0" prefHeight="34.0" prefWidth="394.0" text="to create a new one, press the new service button on the left." textFill="WHITE">
+                        <Label layoutX="31.0" layoutY="45.0" prefHeight="34.0" prefWidth="394.0" text="To create a new one, press the new service button on the left." textFill="WHITE">
                            <font>
                               <Font name="Agency FB" size="20.0" />
                            </font>
@@ -351,6 +349,55 @@
                               <Font name="Agency FB" size="1.0" />
                            </font>
                         </JFXButton>
+                     </children>
+                  </Pane>
+                  <Label fx:id="welcomeLabel" layoutX="540.0" layoutY="100.0" text="Welcome" textFill="WHITE">
+                     <font>
+                        <Font name="Agency FB" size="44.0" />
+                     </font>
+                     <effect>
+                        <DropShadow spread="0.31" />
+                     </effect>
+                  </Label>
+                  <Label fx:id="serviceNameShower" alignment="CENTER" contentDisplay="CENTER" layoutX="384.0" layoutY="104.0" prefHeight="37.0" prefWidth="437.0" textFill="#ccf8ff">
+                     <font>
+                        <Font name="Agency FB" size="30.0" />
+                     </font>
+                  </Label>
+                  <Pane fx:id="serviceInsidePane" layoutX="458.0" layoutY="171.0" visible="false">
+                     <children>
+                        <TextField fx:id="serviceInsideName" alignment="CENTER" editable="false" layoutX="2.0" layoutY="49.0" prefHeight="34.0" prefWidth="281.0" promptText=" " style="-fx-border-color: #c7143b; -fx-background-color: #29303d; -fx-background-insets: 0; -fx-border-radius: 20; -fx-background-radius: 20;" styleClass="servicesInfo" stylesheets="@style.css">
+                           <font>
+                              <Font name="Agency FB" size="20.0" />
+                           </font>
+                        </TextField>
+                        <PasswordField fx:id="serviceInsidePassword" alignment="CENTER" editable="false" layoutY="131.0" prefHeight="34.0" prefWidth="281.0" style="-fx-border-color: #c7143b; -fx-background-color: #29303d; -fx-background-radius: 20; -fx-border-radius: 20;" styleClass="servicesInfo" stylesheets="@style.css">
+                           <font>
+                              <Font name="Agency FB" size="20.0" />
+                           </font>
+                        </PasswordField>
+                        <TextField alignment="CENTER" editable="false" layoutY="131.0" prefHeight="34.0" prefWidth="281.0" promptText=" " style="-fx-border-color: #c7143b; -fx-background-color: #29303d; -fx-background-insets: 0; -fx-border-radius: 20; -fx-background-radius: 20;" styleClass="servicesInfo" stylesheets="@style.css" visible="false">
+                           <font>
+                              <Font name="Agency FB" size="20.0" />
+                           </font>
+                        </TextField>
+                        <JFXCheckBox fx:id="serviceShowPassword" layoutX="89.0" layoutY="180.0" prefHeight="18.0" prefWidth="93.0" text="Show Password" textFill="WHITE" unCheckedColor="WHITE" />
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="84.0" layoutY="8.0" text="Username/Mail" textFill="WHITE">
+                           <font>
+                              <Font name="Agency FB" size="24.0" />
+                           </font>
+                           <effect>
+                              <DropShadow spread="0.31" />
+                           </effect>
+                        </Label>
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="105.0" layoutY="99.0" text="Password" textFill="WHITE">
+                           <font>
+                              <Font name="Agency FB" size="24.0" />
+                           </font>
+                           <effect>
+                              <DropShadow spread="0.31" />
+                           </effect>
+                        </Label>
                      </children>
                   </Pane>
                </children>
@@ -441,7 +488,7 @@
                </children>
             </Pane>
             <JFXButton opacity="0.0" />
-            <JFXButton layoutX="775.0" layoutY="35.0" onAction="#closeButton" prefHeight="27.0" prefWidth="15.0" ripplerFill="#668fe1" styleClass="minimizeButton" stylesheets="@style.css" textFill="WHITE">
+            <JFXButton layoutX="775.0" layoutY="35.0" onAction="#minimizeButton" prefHeight="27.0" prefWidth="15.0" ripplerFill="#668fe1" styleClass="minimizeButton" stylesheets="@style.css" textFill="WHITE">
                <font>
                   <Font size="1.0" />
                </font>

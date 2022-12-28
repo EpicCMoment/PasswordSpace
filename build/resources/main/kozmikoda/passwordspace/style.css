@@ -33,3 +33,12 @@
     -fx-background-color: transparent;
     -fx-text-fill: #FFFFFF;
 }
+
+.servicesPasswordShower {
+    -fx-background-color: transparent;
+    -fx-text-fill: #FFFFFF;
+}
+
+.servicesInfo {
+    -fx-text-fill: #FFFFFF;
+}

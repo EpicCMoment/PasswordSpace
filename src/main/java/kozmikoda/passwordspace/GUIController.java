@@ -32,7 +32,7 @@ public class GUIController {
     @FXML
     private Stage window;
     @FXML
-    private Pane passwdForgetNamePane, passwdForgetPhonePane, passwdForgetNewPasswdPane, signUpPane, signupFailPane, servicesPane, addServicePane, deleteServicePane, openinInfoPane;
+    private Pane passwdForgetNamePane, passwdForgetPhonePane, passwdForgetNewPasswdPane, signUpPane, signupFailPane, servicesPane, addServicePane, deleteServicePane, openinInfoPane, serviceInsidePane;
     @FXML
     private JFXButton loginButton, deleteServiceButton;
     static JFXButton serviceButton, serviceButtons;
@@ -47,11 +47,11 @@ public class GUIController {
     @FXML
     private VBox serviceVbox;
     @FXML
-    private Label failLoginLabel, passwdUserNotFoundLabel, serviceInsideName, serviceInsidePassword, deleteServiceName;
+    private Label failLoginLabel, passwdUserNotFoundLabel, deleteServiceName, serviceNameShower, welcomeLabel;
     @FXML
-    private TextField loginUsernameField;
+    private TextField loginUsernameField, serviceInsideName;
     @FXML
-    private PasswordField loginPasswordField;
+    private PasswordField loginPasswordField, serviceInsidePassword;
 
 
 
@@ -80,6 +80,12 @@ public class GUIController {
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         stage.close();
 
+    }
+
+    // Minimize button
+    @FXML
+    void minimizeButton() {
+        window.setIconified(true);
     }
 
 
@@ -211,6 +217,7 @@ public class GUIController {
 
     // LOGIN PART
     JFXButton lastClickedService;
+    static boolean lastClicked = false;
     @FXML
     void loginButtonAction() {
         String[][] services = new String[serviceVbox.getChildren().size()][3];
@@ -235,19 +242,31 @@ public class GUIController {
                 for (int k = 0; k < serviceVbox.getChildren().size(); k++) {
                     int finalK = k;
                     ((JFXButton) serviceVbox.getChildren().get(k)).setOnAction(e -> {
+                        lastClicked = true;
                         serviceInsideName.setText(services[finalK][1]);
                         serviceInsidePassword.setText(services[finalK][2]);
                         lastClickedService =  ((JFXButton) serviceVbox.getChildren().get(finalK));
-                        deleteServiceButton.setVisible(true);
-                        serviceInsideName.setVisible(true);
-                        serviceInsidePassword.setVisible(true);
-                        openinInfoPane.setVisible(false);
+                        if(lastClickedService.getText().equals("")) {
+                            serviceInsidePane.setVisible(false);
+                            deleteServiceButton.setVisible(false);
+                            serviceNameShower.setVisible(false);
+                        }
+                        else {
+                            serviceNameShower.setVisible(true);
+                            serviceNameShower.setText(lastClickedService.getText());
+                            deleteServiceButton.setVisible(true);
+                            serviceInsidePane.setVisible(true);
+                            openinInfoPane.setVisible(false);
+                            welcomeLabel.setVisible(false);
+                        }
 
                     });
                 }
+
+            openinInfoPane.setVisible(true);
+            welcomeLabel.setVisible(true);
             deleteServiceButton.setVisible(false);
-            serviceInsideName.setText("");
-            serviceInsidePassword.setText("");
+
         } catch (Exception e) {
             failLoginLabel.setVisible(true);
         }
@@ -283,6 +302,19 @@ public class GUIController {
 
         loginButtonAction();
 
+        if (lastClicked) {
+            welcomeLabel.setVisible(false);
+            openinInfoPane.setVisible(false);
+            deleteServiceButton.setVisible(true);
+
+        }
+        else {
+            welcomeLabel.setVisible(true);
+            openinInfoPane.setVisible(true);
+            deleteServiceButton.setVisible(false);
+        }
+
+
         addServiceNameField.clear();
         addServicePasswdField.clear();
         addServiceUserField.clear();
@@ -310,24 +342,30 @@ public class GUIController {
         lastClickedService.setText(" ");
         deleteServiceButton.setVisible(false);
         servicesPane.setDisable(false);
-        serviceInsideName.setVisible(false);
-        serviceInsidePassword.setVisible(false);
+        serviceInsidePane.setVisible(false);
         deleteServicePane.setVisible(false);
+        serviceNameShower.setVisible(false);
+        openinInfoPane.setVisible(true);
         for(int i = 0; i < serviceVbox.getChildren().size(); i++) {
             serviceButton = (JFXButton) serviceVbox.getChildren().get(i);
             serviceButton.setText("");
         }
         loginButtonAction();
+        welcomeLabel.setVisible(false);
     }
 
 
     @FXML
     void signOutButton(ActionEvent event) throws IOException {
         servicesPane.setVisible(false);
+        lastClicked = false;
         serviceInsideName.setText("");
         serviceInsidePassword.setText("");
         loginUsernameField.clear();
         loginPasswordField.clear();
+        passwdShowText.clear();
+        serviceNameShower.setVisible(false);
+        serviceInsidePane.setVisible(false);
 
         for(int i = 0; i < serviceVbox.getChildren().size(); i++) {
             serviceButton = (JFXButton) serviceVbox.getChildren().get(i);
@@ -355,9 +393,9 @@ public class GUIController {
     @FXML
     void servicesBigButton() {
         deleteServiceButton.setVisible(false);
-        serviceInsideName.setVisible(false);
-        serviceInsidePassword.setVisible(false);
+        serviceInsidePane.setVisible(false);
         openinInfoPane.setVisible(true);
+        serviceNameShower.setVisible(false);
 
     }
 
