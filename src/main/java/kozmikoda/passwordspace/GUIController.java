@@ -49,6 +49,8 @@ public class GUIController {
     private Label failLoginLabel, passwdUserNotFoundLabel, deleteServiceName, serviceNameShower, welcomeLabel;
     @FXML
     private PasswordField loginPasswordField, serviceInsidePassword;
+    @FXML
+    private ScrollPane serviceScrollPane;
 
 
     // Default constructor with empty body
@@ -223,7 +225,7 @@ public class GUIController {
     static boolean lastClicked = false;
 
     @FXML
-    void loginButtonAction() {
+    void signinButtonAction() {
         String[][] services = new String[serviceVbox.getChildren().size()][3];
 
         // Check the show password flag
@@ -380,7 +382,7 @@ public class GUIController {
                 serviceIT[0]++;
             });
 
-            loginButtonAction();
+            signinButtonAction();
 
             // GUI stuff below
             if (lastClicked) {
@@ -462,7 +464,7 @@ public class GUIController {
         }
 
         // Set back to login position
-        loginButtonAction();
+        signinButtonAction();
         for(int i = 0; i < serviceVbox.getChildren().size(); i++) {
             serviceButton = (JFXButton) serviceVbox.getChildren().get(i);
             if (serviceButton.getText().equals("")) {
@@ -486,6 +488,7 @@ public class GUIController {
         passwdShowText.clear();
         serviceNameShower.setVisible(false);
         serviceInsidePane.setVisible(false);
+        serviceScrollPane.setVvalue(0.0);
 
         // Clear the buttons
         for(int i = 0; i < serviceVbox.getChildren().size(); i++) {
