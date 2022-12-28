@@ -359,7 +359,7 @@
                         <DropShadow spread="0.31" />
                      </effect>
                   </Label>
-                  <Label fx:id="serviceNameShower" alignment="CENTER" contentDisplay="CENTER" layoutX="384.0" layoutY="104.0" prefHeight="37.0" prefWidth="437.0" textFill="#ccf8ff">
+                  <Label fx:id="serviceNameShower" alignment="CENTER" contentDisplay="CENTER" layoutX="382.0" layoutY="104.0" prefHeight="37.0" prefWidth="437.0" textFill="#ccf8ff">
                      <font>
                         <Font name="Agency FB" size="30.0" />
                      </font>
@@ -376,12 +376,48 @@
                               <Font name="Agency FB" size="20.0" />
                            </font>
                         </PasswordField>
-                        <TextField alignment="CENTER" editable="false" layoutY="131.0" prefHeight="34.0" prefWidth="281.0" promptText=" " style="-fx-border-color: #c7143b; -fx-background-color: #29303d; -fx-background-insets: 0; -fx-border-radius: 20; -fx-background-radius: 20;" styleClass="servicesInfo" stylesheets="@style.css" visible="false">
+                        <TextField fx:id="serviceInsideShowPassword" alignment="CENTER" editable="false" layoutY="131.0" prefHeight="34.0" prefWidth="281.0" promptText=" " style="-fx-border-color: #c7143b; -fx-background-color: #29303d; -fx-background-insets: 0; -fx-border-radius: 20; -fx-background-radius: 20;" styleClass="servicesInfo" stylesheets="@style.css" visible="false">
                            <font>
                               <Font name="Agency FB" size="20.0" />
                            </font>
                         </TextField>
-                        <JFXCheckBox fx:id="serviceShowPassword" layoutX="89.0" layoutY="180.0" prefHeight="18.0" prefWidth="93.0" text="Show Password" textFill="WHITE" unCheckedColor="WHITE" />
+                        <JFXCheckBox fx:id="serviceShowPassword" layoutX="89.0" layoutY="180.0" onAction="#serviceShowPasswordButton" prefHeight="18.0" prefWidth="93.0" text="Show Password" textFill="WHITE" unCheckedColor="WHITE" />
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="84.0" layoutY="8.0" text="Username/Mail" textFill="WHITE">
+                           <font>
+                              <Font name="Agency FB" size="24.0" />
+                           </font>
+                           <effect>
+                              <DropShadow spread="0.31" />
+                           </effect>
+                        </Label>
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="105.0" layoutY="99.0" text="Password" textFill="WHITE">
+                           <font>
+                              <Font name="Agency FB" size="24.0" />
+                           </font>
+                           <effect>
+                              <DropShadow spread="0.31" />
+                           </effect>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="serviceInsidePane1" layoutX="468.0" layoutY="181.0" visible="false">
+                     <children>
+                        <TextField fx:id="serviceInsideName1" alignment="CENTER" editable="false" layoutX="2.0" layoutY="49.0" prefHeight="34.0" prefWidth="281.0" promptText=" " style="-fx-border-color: #c7143b; -fx-background-color: #29303d; -fx-background-insets: 0; -fx-border-radius: 20; -fx-background-radius: 20;" styleClass="servicesInfo" stylesheets="@style.css">
+                           <font>
+                              <Font name="Agency FB" size="20.0" />
+                           </font>
+                        </TextField>
+                        <PasswordField fx:id="serviceInsidePassword1" alignment="CENTER" editable="false" layoutY="131.0" prefHeight="34.0" prefWidth="281.0" style="-fx-border-color: #c7143b; -fx-background-color: #29303d; -fx-background-radius: 20; -fx-border-radius: 20;" styleClass="servicesInfo" stylesheets="@style.css">
+                           <font>
+                              <Font name="Agency FB" size="20.0" />
+                           </font>
+                        </PasswordField>
+                        <TextField fx:id="serviceInsideShowPassword1" alignment="CENTER" editable="false" layoutY="131.0" prefHeight="34.0" prefWidth="281.0" promptText=" " style="-fx-border-color: #c7143b; -fx-background-color: #29303d; -fx-background-insets: 0; -fx-border-radius: 20; -fx-background-radius: 20;" styleClass="servicesInfo" stylesheets="@style.css" visible="false">
+                           <font>
+                              <Font name="Agency FB" size="20.0" />
+                           </font>
+                        </TextField>
+                        <JFXCheckBox fx:id="serviceShowPassword1" layoutX="89.0" layoutY="180.0" onAction="#serviceShowPasswordButton" prefHeight="18.0" prefWidth="93.0" text="Show Password" textFill="WHITE" unCheckedColor="WHITE" />
                         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="84.0" layoutY="8.0" text="Username/Mail" textFill="WHITE">
                            <font>
                               <Font name="Agency FB" size="24.0" />

@@ -4,7 +4,6 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -16,8 +15,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class GUIController {
-
-
     PSQLConnection db = new PSQLConnection();
     static MainUserAccount m;
 
@@ -25,7 +22,6 @@ public class GUIController {
     double offsetX, offsetY;
 
     private Stage stage;
-    private Scene scene;
 
     @FXML
     private ImageView image;
@@ -35,11 +31,11 @@ public class GUIController {
     private Pane passwdForgetNamePane, passwdForgetPhonePane, passwdForgetNewPasswdPane, signUpPane, signupFailPane, servicesPane, addServicePane, deleteServicePane, openinInfoPane, serviceInsidePane;
     @FXML
     private JFXButton loginButton, deleteServiceButton;
-    static JFXButton serviceButton, serviceButtons;
+    static JFXButton serviceButton;
     @FXML
-    private JFXCheckBox signinShowPassword;
+    private JFXCheckBox signinShowPassword, serviceShowPassword;
     @FXML
-    private TextField passwdVerifName, signUpNameField, signUpSurnameField, signUpUsernameField, signUpPhoneField, signUpMailField, signUpPasswordField, addServiceNameField, addServiceUserField, passwdShowText;
+    private TextField passwdVerifName, signUpNameField, signUpSurnameField, signUpUsernameField, signUpPhoneField, signUpMailField, signUpPasswordField, addServiceNameField, addServiceUserField, passwdShowText, serviceInsideShowPassword;
     @FXML
     private Hyperlink forgotPasswdLink, signUpLink;
     @FXML
@@ -170,6 +166,8 @@ public class GUIController {
         signUpLink.setDisable(true);
     }
 
+    // Sign up screen back button
+    // GUI stuff below
     @FXML
     void signUpBackButton() {
         // Close the panes
@@ -188,6 +186,7 @@ public class GUIController {
         signUpPasswordField.clear();
     }
 
+    // Sign up the user to the database
     @FXML
     void signUpButtonAction() {
         try {
@@ -260,11 +259,18 @@ public class GUIController {
             for (int k = 0; k < serviceVbox.getChildren().size(); k++) {
                 int finalK = k;
                 ((JFXButton) serviceVbox.getChildren().get(k)).setOnAction(e -> {
+
+                    serviceShowPassword.setSelected(false);
+                    serviceShowFlag = false;
+                    serviceInsideShowPassword.setVisible(false);
                     lastClicked = true;
+
+                    // Set service info
                     serviceInsideName.setText(services[finalK][1]);
                     serviceInsidePassword.setText(services[finalK][2]);
-                    lastClickedService =  ((JFXButton) serviceVbox.getChildren().get(finalK));
 
+                    // Set GUI according to the last clicked service
+                    lastClickedService =  ((JFXButton) serviceVbox.getChildren().get(finalK));
                     if(lastClickedService.getText().equals("")) {
                         serviceInsidePane.setVisible(false);
                         deleteServiceButton.setVisible(false);
@@ -275,6 +281,7 @@ public class GUIController {
                         serviceNameShower.setText(lastClickedService.getText());
                         deleteServiceButton.setVisible(true);
                         serviceInsidePane.setVisible(true);
+                        serviceInsidePassword.setVisible(true);
                         openinInfoPane.setVisible(false);
                         welcomeLabel.setVisible(false);
                     }
@@ -309,6 +316,24 @@ public class GUIController {
             loginPasswordField.setText(passwdShowText.getText());
         }
     }
+
+    // Service show password
+    boolean serviceShowFlag = false;
+    @FXML
+    void serviceShowPasswordButton() {
+        serviceShowFlag = !serviceShowFlag;
+        serviceInsideShowPassword.setText(serviceInsidePassword.getText());
+        if (serviceShowFlag) {
+            serviceInsidePassword.setVisible(false);
+            serviceInsideShowPassword.setVisible(true);
+        }
+        else {
+            serviceInsidePassword.setVisible(true);
+            serviceInsideShowPassword.setVisible(false);
+        }
+
+    }
+
 
     // Inside services back button
     @FXML
