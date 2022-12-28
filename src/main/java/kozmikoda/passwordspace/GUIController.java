@@ -10,17 +10,17 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.sql.SQLException;
 
+
 public class GUIController {
-    PSQLConnection db = new PSQLConnection();
-    static MainUserAccount m;
+    // SQL variables
+    PSQLConnection database = new PSQLConnection();
+    static MainUserAccount user;
 
-
+    // GUI variables
     double offsetX, offsetY;
-
     private Stage stage;
 
     @FXML
@@ -28,14 +28,17 @@ public class GUIController {
     @FXML
     private Stage window;
     @FXML
-    private Pane passwdForgetNamePane, passwdForgetPhonePane, passwdForgetNewPasswdPane, signUpPane, signupFailPane, servicesPane, addServicePane, deleteServicePane, openinInfoPane, serviceInsidePane;
+    private Pane passwdForgetNamePane, passwdForgetPhonePane, passwdForgetNewPasswdPane, signUpPane, signupFailPane,
+            servicesPane, addServicePane, deleteServicePane, openinInfoPane, serviceInsidePane;
     @FXML
     private JFXButton loginButton, deleteServiceButton;
     static JFXButton serviceButton;
     @FXML
-    private JFXCheckBox signinShowPassword, serviceShowPassword;
+    private JFXCheckBox signinShowPassword, serviceShowPassword, addServiceShowPassword;
     @FXML
-    private TextField passwdVerifName, signUpNameField, signUpSurnameField, signUpUsernameField, signUpPhoneField, signUpMailField, signUpPasswordField, addServiceNameField, addServiceUserField, passwdShowText, serviceInsideShowPassword;
+    private TextField passwdVerifName, signUpNameField, signUpSurnameField, signUpUsernameField, signUpPhoneField,
+            signUpMailField, signUpPasswordField, addServiceNameField, addServiceUserField, passwdShowText,
+            serviceInsideShowPassword, loginUsernameField, serviceInsideName, addServiceShowPasswdText;
     @FXML
     private Hyperlink forgotPasswdLink, signUpLink;
     @FXML
@@ -44,8 +47,6 @@ public class GUIController {
     private VBox serviceVbox;
     @FXML
     private Label failLoginLabel, passwdUserNotFoundLabel, deleteServiceName, serviceNameShower, welcomeLabel;
-    @FXML
-    private TextField loginUsernameField, serviceInsideName;
     @FXML
     private PasswordField loginPasswordField, serviceInsidePassword;
 
@@ -115,13 +116,12 @@ public class GUIController {
         passwdVerifCode.clear();
     }
 
-
     // Verification page
     @FXML
     void sendVerificationButton() {
         try {
             passwdUserNotFoundLabel.setVisible(false);
-            m = new MainUserAccount(db, passwdVerifName.getText());
+            user = new MainUserAccount(database, passwdVerifName.getText());
 
             passwdForgetNamePane.setVisible(false);
             passwdForgetPhonePane.setVisible(true);
@@ -143,7 +143,7 @@ public class GUIController {
     @FXML
     void resetPasswdButton() throws SQLException {
         // Updating SQL password
-        m.updatePassword(passwdNewPasswd.getText());
+        user.updatePassword(passwdNewPasswd.getText());
 
         // GUI stuff below
         passwdForgetNewPasswdPane.setVisible(false);
@@ -152,7 +152,6 @@ public class GUIController {
         signUpLink.setDisable(false);
         passwdNewPasswd.clear();
     }
-
 
 
     // SIGN UP PART
@@ -191,10 +190,10 @@ public class GUIController {
     void signUpButtonAction() {
         try {
             // New SQL connection
-            db = new PSQLConnection();
+            database = new PSQLConnection();
 
             // Registering to the database according to signup info
-            m = new MainUserAccount(db, signUpUsernameField.getText(), signUpPasswordField.getText(),
+            user = new MainUserAccount(database, signUpUsernameField.getText(), signUpPasswordField.getText(),
                     signUpNameField.getText(), signUpMailField.getText(), signUpPhoneField.getText());
 
             // Close the pane. And other GUI stuff below
@@ -234,18 +233,18 @@ public class GUIController {
 
         try {
             // Check the username and password
-            UserValidator.validateUser(db, loginUsernameField.getText(), loginPasswordField.getText());
+            UserValidator.validateUser(database, loginUsernameField.getText(), loginPasswordField.getText());
 
             // GUI stuff below
             servicesPane.setVisible(true);
             failLoginLabel.setVisible(false);
 
             // Connect the user's database
-            m = new MainUserAccount(db, loginUsernameField.getText());
+            user = new MainUserAccount(database, loginUsernameField.getText());
 
             // Get service info from the database
             final int[] loginIT = {0};
-            m.getServices().getHashMap().forEach((serviceName, credentials) -> {
+            user.getServices().getHashMap().forEach((serviceName, credentials) -> {
                 serviceButton = (JFXButton) serviceVbox.getChildren().get(loginIT[0]);
                 serviceButton.setText(serviceName);
                 serviceButton.setVisible(true);
@@ -334,14 +333,16 @@ public class GUIController {
 
     }
 
-
     // Inside services back button
     @FXML
     void servicesBackButton() {
         // GUI stuff below
+        addServiceShowPassword.setSelected(false);
+        showPasswdFlag2 = false;
         addServicePane.setVisible(false);
         addServiceNameField.clear();
         addServicePasswdField.clear();
+        addServiceShowPasswdText.clear();
         addServiceUserField.clear();
         servicesPane.setDisable(false);
     }
@@ -350,6 +351,10 @@ public class GUIController {
     @FXML
     void addServicePaneOpenerButton() {
         // GUI stuff below
+        addServiceShowPassword.setSelected(false);
+        showPasswdFlag2 = false;
+        addServicePasswdField.setVisible(true);
+        addServiceShowPasswdText.setVisible(false);
         addServicePane.setVisible(true);
         servicesPane.setDisable(true);
     }
@@ -358,12 +363,15 @@ public class GUIController {
     // Adding services to the database
     @FXML
     void addServiceButton() throws SQLException {
+        if (showPasswdFlag2) {
+            addServicePasswdField.setText(addServiceShowPasswdText.getText());
+        }
         // Add service to the database
-        m.addNewService(addServiceNameField.getText(), addServiceUserField.getText(), addServicePasswdField.getText());
+        user.addNewService(addServiceNameField.getText(), addServiceUserField.getText(), addServicePasswdField.getText());
 
         // Update the GUI for service names
         final int[] serviceIT = {0};
-        m.getServices().getHashMap().forEach((serviceName, credentials) -> {
+        user.getServices().getHashMap().forEach((serviceName, credentials) -> {
             serviceButton = (JFXButton) serviceVbox.getChildren().get(serviceIT[0]);
             serviceButton.setText(serviceName);
             serviceButton.setVisible(true);
@@ -387,7 +395,26 @@ public class GUIController {
 
         addServiceNameField.clear();
         addServicePasswdField.clear();
+        addServiceShowPasswdText.clear();
         addServiceUserField.clear();
+    }
+
+    // Add service show password button
+    static boolean showPasswdFlag2 = false;
+    @FXML
+    void addServiceShowPasswordButton() {
+        showPasswdFlag2 = !showPasswdFlag2;
+        if(showPasswdFlag2) {
+            addServicePasswdField.setVisible(false);
+            addServiceShowPasswdText.setText(addServicePasswdField.getText());
+            addServiceShowPasswdText.setVisible(true);
+        }
+        else {
+            addServicePasswdField.setVisible(true);
+            addServiceShowPasswdText.setVisible(false);
+            addServicePasswdField.setText(addServiceShowPasswdText.getText());
+        }
+
     }
 
 
@@ -414,7 +441,7 @@ public class GUIController {
     @FXML
     void deleteServiceYesButton() throws SQLException {
         // Remove service from database according to the last clicked service
-        m.removeService(lastClickedService.getText());
+        user.removeService(lastClickedService.getText());
 
         // GUI stuff below
         lastClickedService.setText(" ");
@@ -435,6 +462,7 @@ public class GUIController {
         loginButtonAction();
         welcomeLabel.setVisible(false);
     }
+
 
     // Sign out part
     @FXML
