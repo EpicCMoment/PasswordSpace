@@ -363,40 +363,43 @@ public class GUIController {
     // Adding services to the database
     @FXML
     void addServiceButton() throws SQLException {
-        if (showPasswdFlag2) {
-            addServicePasswdField.setText(addServiceShowPasswdText.getText());
+        if (addServiceNameField.getText().trim().length() > 0) {
+            if (showPasswdFlag2) {
+                addServicePasswdField.setText(addServiceShowPasswdText.getText());
+            }
+
+            // Add service to the database
+            user.addNewService(addServiceNameField.getText(), addServiceUserField.getText(), addServicePasswdField.getText());
+
+            // Update the GUI for service names
+            final int[] serviceIT = {0};
+            user.getServices().getHashMap().forEach((serviceName, credentials) -> {
+                serviceButton = (JFXButton) serviceVbox.getChildren().get(serviceIT[0]);
+                serviceButton.setText(serviceName);
+                serviceButton.setVisible(true);
+                serviceIT[0]++;
+            });
+
+            loginButtonAction();
+
+            // GUI stuff below
+            if (lastClicked) {
+                welcomeLabel.setVisible(false);
+                openinInfoPane.setVisible(false);
+                deleteServiceButton.setVisible(true);
+
+            } else {
+                welcomeLabel.setVisible(true);
+                openinInfoPane.setVisible(true);
+                deleteServiceButton.setVisible(false);
+            }
+
+            addServiceNameField.clear();
+            addServicePasswdField.clear();
+            addServiceShowPasswdText.clear();
+            addServiceUserField.clear();
+
         }
-        // Add service to the database
-        user.addNewService(addServiceNameField.getText(), addServiceUserField.getText(), addServicePasswdField.getText());
-
-        // Update the GUI for service names
-        final int[] serviceIT = {0};
-        user.getServices().getHashMap().forEach((serviceName, credentials) -> {
-            serviceButton = (JFXButton) serviceVbox.getChildren().get(serviceIT[0]);
-            serviceButton.setText(serviceName);
-            serviceButton.setVisible(true);
-            serviceIT[0]++;
-        });
-
-        loginButtonAction();
-
-        // GUI stuff below
-        if (lastClicked) {
-            welcomeLabel.setVisible(false);
-            openinInfoPane.setVisible(false);
-            deleteServiceButton.setVisible(true);
-
-        }
-        else {
-            welcomeLabel.setVisible(true);
-            openinInfoPane.setVisible(true);
-            deleteServiceButton.setVisible(false);
-        }
-
-        addServiceNameField.clear();
-        addServicePasswdField.clear();
-        addServiceShowPasswdText.clear();
-        addServiceUserField.clear();
     }
 
     // Add service show password button
