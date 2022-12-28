@@ -460,6 +460,12 @@ public class GUIController {
 
         // Set back to login position
         loginButtonAction();
+        for(int i = 0; i < serviceVbox.getChildren().size(); i++) {
+            serviceButton = (JFXButton) serviceVbox.getChildren().get(i);
+            if (serviceButton.getText().equals("")) {
+                serviceButton.setVisible(false);
+            }
+        }
         welcomeLabel.setVisible(false);
     }
 

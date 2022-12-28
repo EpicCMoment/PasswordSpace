@@ -42,3 +42,9 @@
 .servicesInfo {
     -fx-text-fill: #FFFFFF;
 }
+
+
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+

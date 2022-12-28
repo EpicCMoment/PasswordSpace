@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.DropShadow?>
@@ -284,19 +285,69 @@
                         <Image url="@passwordSpace.png" />
                      </image>
                   </ImageView>
-                  <VBox fx:id="serviceVbox" alignment="CENTER" layoutX="12.0" layoutY="150.0" prefHeight="426.0" prefWidth="328.0">
-                     <children>
-                        <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
-                        <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
-                        <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
-                        <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
-                        <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
-                        <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
-                        <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
-                        <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
-                        <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
-                     </children>
-                  </VBox>
+                  <ScrollPane hbarPolicy="NEVER" layoutX="12.0" layoutY="160.0" prefHeight="400.0" prefWidth="328.0" stylesheets="@style.css" vbarPolicy="NEVER">
+                     <content>
+                        <VBox fx:id="serviceVbox" alignment="CENTER" prefHeight="2322.0" prefWidth="326.0" style="-fx-background-color: #282a37;">
+                           <children>
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                              <JFXButton buttonType="RAISED" prefHeight="49.0" prefWidth="314.0" textFill="WHITE" visible="false" />
+                           </children>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
                   <JFXButton layoutX="520.0" layoutY="27.0" opacity="0.0" prefHeight="49.0" prefWidth="36.0" textFill="WHITE" />
                   <JFXButton layoutX="24.0" layoutY="24.0" opacity="0.0" />
                   <JFXButton fx:id="deleteServiceButton" buttonType="RAISED" layoutX="535.0" layoutY="410.0" onAction="#deleteServicePaneOpenerButton" prefHeight="43.0" prefWidth="134.0" style="-fx-background-color: #d41056; -fx-background-radius: 20;" text="Delete the Service" textFill="WHITE">
