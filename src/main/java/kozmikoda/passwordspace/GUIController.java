@@ -216,6 +216,7 @@ public class GUIController {
 
         } catch (Exception e) {
             signupFailPane.setVisible(true);
+            e.printStackTrace();
         }
     }
 
