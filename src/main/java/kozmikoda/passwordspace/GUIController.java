@@ -46,11 +46,12 @@ public class GUIController {
     @FXML
     private VBox serviceVbox;
     @FXML
-    private Label failLoginLabel, passwdUserNotFoundLabel, deleteServiceName, serviceNameShower, welcomeLabel;
+    private Label failLoginLabel, passwdUserNotFoundLabel, deleteServiceName, serviceNameShower, welcomeLabel, verifCodeErrorLabel;
     @FXML
     private PasswordField loginPasswordField, serviceInsidePassword;
     @FXML
     private ScrollPane serviceScrollPane;
+
 
 
     // Default constructor with empty body
@@ -119,6 +120,7 @@ public class GUIController {
     }
 
     // Verification page
+    int verifCode;
     @FXML
     void sendVerificationButton() {
         try {
@@ -127,6 +129,11 @@ public class GUIController {
 
             passwdForgetNamePane.setVisible(false);
             passwdForgetPhonePane.setVisible(true);
+
+            // SEND VERIFICATION CODE
+            verifCode = Utility.generateResetCode();
+            ResetCodeSender.sendViaSMS(Integer.toString(verifCode) ,user.getPhoneNumber());
+
 
         } catch (Exception e) {
             passwdUserNotFoundLabel.setVisible(true);
@@ -137,8 +144,14 @@ public class GUIController {
     // Actual reset password page
     @FXML
     void verifyButton() {
-        passwdForgetPhonePane.setVisible(false);
-        passwdForgetNewPasswdPane.setVisible(true);
+        if (Utility.validateResetCode(verifCode, Integer.parseInt(passwdVerifCode.getText()))) {
+            passwdForgetPhonePane.setVisible(false);
+            passwdForgetNewPasswdPane.setVisible(true);
+            verifCodeErrorLabel.setVisible(false);
+        }
+        else {
+            verifCodeErrorLabel.setVisible(true);
+        }
     }
 
     // After password reset button clicked
