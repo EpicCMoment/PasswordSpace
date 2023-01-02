@@ -4,11 +4,8 @@ public class Test {
 
     public static void main(String[] args) {
         try {
-            PSQLConnection db = new PSQLConnection();
 
-            MainUserAccount m = new MainUserAccount(db, "admin");
-
-            m.addNewService("facebook", "kelsertaci", "dayin3");
+        ResetCodeSender.sendViaSMS("deneme mesagi", "5457142292");
 
 
         }catch (Exception e) {

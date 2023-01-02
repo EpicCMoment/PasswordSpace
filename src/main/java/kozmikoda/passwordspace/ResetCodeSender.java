@@ -10,9 +10,9 @@ import java.util.Scanner;
 
 public class ResetCodeSender {
 
-    final private static String apiID = "";
-    final private static String apiKey = "";
-    final private static String sender = "";
+    final private static String apiID = "ba0ff55d11927c7a8b4924fd";
+    final private static String apiKey = "c3896e07a614220f78b49465";
+    final private static String sender = "SMS TEST";
     final private static String apiUrl = "https://api.vatansms.net/api/v1/1toN";
 
     public static void sendViaSMS(String message, String phoneNumber) {
