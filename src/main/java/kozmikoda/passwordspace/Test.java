@@ -5,15 +5,11 @@ public class Test {
     public static void main(String[] args) {
         try {
 
-        ResetCodeSender.sendViaSMS("deneme mesagi", "5457142292");
-
+            ResetCodeSender.sendViaSMS("deneme mesagi", "5457142292");
 
         }catch (Exception e) {
             e.printStackTrace();
         }
-
-
-
 
     }
 

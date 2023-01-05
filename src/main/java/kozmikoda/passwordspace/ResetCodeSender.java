@@ -15,17 +15,18 @@ public class ResetCodeSender {
     final private static String sender = "SMS TEST";
     final private static String apiUrl = "https://api.vatansms.net/api/v1/1toN";
 
+
     public static void sendViaSMS(String message, String phoneNumber) {
+
 
         String jsonFormData = "{ \"api_id\": \"%s\", \"api_key\": \"%s\", \"sender\": \"%s\", \"message_type\": \"normal\", \"message\": \"%s\", \"phones\": [ \"%s\" ] }".formatted(
                 apiID, apiKey, sender, message, phoneNumber
         );
 
+
         sendJSON(jsonFormData);
 
-
     }
-
 
     private static void sendJSON(String JSONData) {
         try {
@@ -60,9 +61,10 @@ public class ResetCodeSender {
 
         StringBuilder targets = new StringBuilder();
 
-        for (var number : phoneNumbers) {
+        for (String number : phoneNumbers) {
             targets.append(number).append(",");
         }
+
 
         String jsonFormData = "{ \"api_id\": \"%s\", \"api_key\": \"%s\", \"sender\": \"%s\", \"message_type\": \"normal\", \"message\": \"%s\", \"phones\": [ \"%s\" ] }".formatted(
                 apiID, apiKey, sender, message, targets.toString()
