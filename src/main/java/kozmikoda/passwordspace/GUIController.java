@@ -57,21 +57,27 @@ public class GUIController {
     // Default constructor with empty body
     public GUIController() throws SQLException {}
 
-    // Drag window setter
+    /**
+     * Drag window setter
+     */
     @FXML
     void dragWindow(MouseEvent event) {
         window.setX(event.getScreenX() - offsetX);
         window.setY(event.getScreenY() - offsetY);
     }
 
-    // Set window according to the drag operation
+    /**
+     * Set window according to the drag operation
+     */
     @FXML
     public void setWindowOffset(MouseEvent event) {
         offsetX = event.getSceneX();
         offsetY = event.getSceneY();
     }
 
-    // Close button
+    /**
+     * Close button
+     */
     @FXML
     protected void closeButton(ActionEvent event) {
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
@@ -79,7 +85,9 @@ public class GUIController {
 
     }
 
-    // Minimize button
+    /** Minimize button
+     *
+     */
     @FXML
     void minimizeButton() {
         window.setIconified(true);
@@ -97,7 +105,9 @@ public class GUIController {
         signUpLink.setDisable(true);
     }
 
-    // Back button1
+    /** Back button1
+     *
+     */
     @FXML
     void forgetPasswdBackButton() {
         // GUI stuff below
@@ -109,7 +119,9 @@ public class GUIController {
         passwdVerifName.clear();
     }
 
-    // Back button2
+    /** Back button2
+     *
+     */
     @FXML
     void forgetPasswdBackButton2() {
         // GUI stuff below
@@ -119,7 +131,9 @@ public class GUIController {
         passwdVerifCode.clear();
     }
 
-    // Verification page
+    /** Verification page
+     *
+     */
     int verifCode;
     @FXML
     void sendVerificationButton() {
@@ -141,7 +155,9 @@ public class GUIController {
 
     }
 
-    // Actual reset password page
+    /** Actual reset password page
+     *
+     */
     @FXML
     void verifyButton() {
         if (Utility.validateResetCode(verifCode, Integer.parseInt(passwdVerifCode.getText()))) {
@@ -154,7 +170,10 @@ public class GUIController {
         }
     }
 
-    // After password reset button clicked
+    /** After password reset button clicked
+     *
+     * @throws SQLException random sql exception
+     */
     @FXML
     void resetPasswdButton() throws SQLException {
         // Updating SQL password
@@ -200,7 +219,9 @@ public class GUIController {
         signUpPasswordField.clear();
     }
 
-    // Sign up the user to the database
+    /** Sign up the user to the database
+     *
+     */
     @FXML
     void signUpButtonAction() {
         try {
@@ -237,6 +258,7 @@ public class GUIController {
     // LOG IN (SIGN IN) PART
     JFXButton lastClickedService;
     static boolean lastClicked = false;
+
 
     @FXML
     void signinButtonAction() {
@@ -314,7 +336,9 @@ public class GUIController {
         }
     }
 
-    // Show password button in the log in (sign in) part
+    /**
+     * Show password button in the log in (sign in) part
+     */
     static boolean showPasswdFlag = false;
     @FXML
     void signinShowPasswordButton() {
@@ -332,7 +356,9 @@ public class GUIController {
         }
     }
 
-    // Service show password
+    /** Service show password
+     *
+     */
     boolean serviceShowFlag = false;
     @FXML
     void serviceShowPasswordButton() {
@@ -349,7 +375,9 @@ public class GUIController {
 
     }
 
-    // Inside services back button
+    /** Inside services back button
+     *
+     */
     @FXML
     void servicesBackButton() {
         // GUI stuff below
@@ -363,7 +391,9 @@ public class GUIController {
         servicesPane.setDisable(false);
     }
 
-    // Open add service pane
+    /** Open add service pane
+     *
+     */
     @FXML
     void addServicePaneOpenerButton() {
         // GUI stuff below
@@ -376,7 +406,10 @@ public class GUIController {
     }
 
 
-    // Adding services to the database
+    /** Adding services to the database
+     *
+     * @throws SQLException a random sql exception
+     */
     @FXML
     void addServiceButton() throws SQLException {
         if (addServiceNameField.getText().trim().length() > 0) {
@@ -418,7 +451,9 @@ public class GUIController {
         }
     }
 
-    // Add service show password button
+    /**
+     * Add service show password button
+     */
     static boolean showPasswdFlag2 = false;
     @FXML
     void addServiceShowPasswordButton() {
@@ -439,7 +474,9 @@ public class GUIController {
 
     // Delete services part
 
-    // Delete service yes no pane opener
+    /** Delete service yes no pane opener
+     *
+     */
     @FXML
     void deleteServicePaneOpenerButton() {
         deleteServicePane.setVisible(true);
@@ -456,7 +493,9 @@ public class GUIController {
         deleteServiceName.setText("");
     }
 
-    // Delete service yes button
+    /** Delete service yes button
+     *
+     */
     @FXML
     void deleteServiceYesButton() throws SQLException {
         // Remove service from database according to the last clicked service
@@ -489,7 +528,9 @@ public class GUIController {
     }
 
 
-    // Sign out part
+    /** Sign out part
+     *
+     */
     @FXML
     void signOutButton(ActionEvent event) throws IOException {
         // GUI stuff below

@@ -4,8 +4,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * Helper class to validate user accounts
+ */
 public class UserValidator {
 
+    /**
+     * Validates a user account according to given information
+     * @param dbConnection where to fetch the user
+     * @param username which user to fetch
+     * @param password prompted user
+     * @throws SQLException is thrown if user doesn't exist in the database
+     * @throws IncorrectPasswordException is thrown if password of the user is not correct
+     */
     public static void validateUser(PSQLConnection dbConnection, String username, String password) throws SQLException, IncorrectPasswordException{
 
         dbConnection.connectToDatabase(username);

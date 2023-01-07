@@ -8,6 +8,9 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
+/**
+ * Helper class to send reset codes via SMS or E-Mail
+ */
 public class ResetCodeSender {
 
     final private static String apiID = "ba0ff55d11927c7a8b4924fd";
@@ -16,6 +19,11 @@ public class ResetCodeSender {
     final private static String apiUrl = "https://api.vatansms.net/api/v1/1toN";
 
 
+    /**
+     * sends reset code using SMS
+     * @param message content of the SMS
+     * @param phoneNumber where to send the sms
+     */
     public static void sendViaSMS(String message, String phoneNumber) {
 
 
@@ -28,6 +36,10 @@ public class ResetCodeSender {
 
     }
 
+    /**
+     * sends JSON over the network to the API url
+     * @param JSONData
+     */
     private static void sendJSON(String JSONData) {
         try {
             URL url = new URL(apiUrl);
@@ -57,6 +69,11 @@ public class ResetCodeSender {
         }
     }
 
+    /**
+     * Same as sendViaSms but this version can get more phone numbers to send at once
+     * @param message content of the sms
+     * @param phoneNumbers which phones to send the sms
+     */
     public static void sendViaSMS(String message, String... phoneNumbers) {
 
         StringBuilder targets = new StringBuilder();

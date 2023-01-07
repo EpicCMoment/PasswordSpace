@@ -3,6 +3,9 @@ package kozmikoda.passwordspace;
 import java.security.MessageDigest;
 import java.util.HexFormat;
 
+/**
+ * Stores all functionality of the hashed password generation
+ */
 public class HashedPassword {
 
     public static final String[] supportedAlgorithms = {"sha-256", "md5", "sha-512"};

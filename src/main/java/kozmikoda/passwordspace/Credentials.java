@@ -1,6 +1,9 @@
 package kozmikoda.passwordspace;
 
 
+/**
+ * Stores the base information of a user
+ */
 public class Credentials {
 
     String username;

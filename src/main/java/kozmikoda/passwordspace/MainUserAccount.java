@@ -36,8 +36,9 @@ public class MainUserAccount {
     Statement s;
 
 
-
-    // call to connect to an existing user
+    /**
+     * call to connect to an existing user
+     */
     MainUserAccount(PSQLConnection dbConnection, String userName) throws SQLException{
         this.userDatabase = userName;
         this.userName = userName;
@@ -54,7 +55,10 @@ public class MainUserAccount {
 
     }
 
-    // call to create a new user and connect to it
+    /**
+     * call to create a new user and connect to it
+     */
+
     MainUserAccount(PSQLConnection dbConnection, String userName, String password, String realName,
                     String eMail, String phoneNumber) throws SQLException
     {

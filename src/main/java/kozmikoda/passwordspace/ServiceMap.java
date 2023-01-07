@@ -7,12 +7,16 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 
+/**
+ * Container class to store bunch of service
+ */
 public class ServiceMap {
 
     // key of the HashMap ==> Service Name
     // 1.st value in the pair ==> User Identifier
     // 2.nd value in the pair ==> Password
     private HashMap<String, Pair<String, String>> services = new HashMap<>();
+
 
     ServiceMap() {}
 
